@@ -1,7 +1,7 @@
 const masthead = document.querySelector('.masthead');
 const menu = masthead.querySelector('.menu-toggle');
 const navigation = masthead.querySelector('.site-nav');
-const narrow = window.matchMedia('(max-width: 700px)');
+const narrow = window.matchMedia('(max-width: 900px)');
 
 function toggleNavigation(open) {
   masthead.classList.toggle('menu-open', open);
