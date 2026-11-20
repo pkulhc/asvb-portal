@@ -2,6 +2,7 @@ export const sources = {
   firstMeeting: 'https://www.chinaphar.com/announcement/view/104',
   shanghai: 'https://www.shsmu.edu.cn/news/info/1011/15228.htm',
   shenzhen: 'https://www.gdsta.cn/xhzc/ykxh/gdsylxh/xhdt110/content_47634',
+  shenzhenNotice: 'https://mp.weixin.qq.com/s/y9G50P5hjH9jaP32kPW_BA',
   interview: 'https://www.oaepublish.com/interviews/vp.348',
   singapore: 'https://newshub.sustech.edu.cn/html/202606/47678.html',
   city: 'https://commons.wikimedia.org/wiki/File:Lago_Nam_Van,_Macao,_2013-08-08,_DD_04.jpg',
@@ -12,6 +13,7 @@ export const sources = {
 };
 
 export const secretariat = 'pharmc@sustech.edu.cn';
+export const wechat = 'luhaocheng002';
 
 export const records = [
   {
@@ -23,7 +25,8 @@ export const records = [
     venue: ['新加坡国立大学', 'National University of Singapore'],
     image: 'singapore-meeting.webp',
     alt: ['第十一届 ASVB 与会者在新加坡国立大学阶梯报告厅合影', 'Delegates of the 11th ASVB meeting in the tiered auditorium at the National University of Singapore'],
-    note: ['血管稳态、免疫代谢与转化医学', 'Vascular homeostasis, immunometabolism and translational medicine'],
+    themeLabel: ['会议主题', 'Meeting theme'],
+    theme: ['创新·精准·协作——共筑血管生物学未来', 'Innovation, Precision, Collaboration: Shaping the Future of Vascular Biology'],
     intro: ['从内皮功能与血管重构，到代谢调控与转化治疗，研究者在新加坡国立大学讨论不同疾病背后的共同机制。', 'At the National University of Singapore, researchers explored how changes in the endothelium, vessel wall and metabolic environment contribute to vascular disease.'],
     host: ['ASVB 主办，新加坡国立大学承办，南方科技大学协办。大会主会场设在 MD11 报告厅。', 'ASVB convened the meeting, hosted by the National University of Singapore with Southern University of Science and Technology as co-organizer. The main sessions took place in the MD11 Auditorium.'],
     sections: [
@@ -44,7 +47,9 @@ export const records = [
     venue: ['中国深圳', 'Shenzhen, China'],
     image: 'shenzhen-meeting.webp',
     alt: ['深圳第十届 ASVB 专场与会者在蓝色大会屏幕前合影', 'Participants in the 10th ASVB scientific meeting in front of the conference screen in Shenzhen'],
-    note: ['血管稳态、重构与疾病发生机制', 'Vascular homeostasis, remodelling and disease mechanisms'],
+    themeLabel: ['ASVB 学术会议主题（中译）', 'ASVB meeting theme'],
+    theme: ['血管生物学的创新与挑战', 'Innovations and Challenges in Vascular Biology'],
+    forumTheme: '探讨疾病机制，护佑血管健康',
     intro: ['第十届 ASVB 会议与第二届血管稳态与疾病研究前沿论坛在深圳联合举行，聚焦血管如何维持稳态，以及稳态失衡如何参与疾病发生。', 'The 10th ASVB meeting took place in Shenzhen alongside the 2nd Conference on Vascular Homeostasis and Diseases. The joint programme examined how vessels maintain homeostasis and what happens when that balance is disturbed.'],
     host: ['亚洲血管生物学学会、南方科技大学医学院和南方科技大学稳态医学研究院联合主办，广东省药理学会协办，深圳市生物医药促进会承办。', 'ASVB, the School of Medicine and the Homeostatic Medicine Institute at Southern University of Science and Technology jointly convened the event, with support from the Guangdong Pharmacological Society and local organizers in Shenzhen.'],
     sections: [
