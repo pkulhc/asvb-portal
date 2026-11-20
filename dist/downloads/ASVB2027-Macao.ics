@@ -1,0 +1,18 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ASVB//Scientific Meetings//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:asvb-12-scientific-20270823@asvb.com.cn
+DTSTAMP:20261120T000000Z
+DTSTART;VALUE=DATE:20270823
+DTEND;VALUE=DATE:20270825
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+SUMMARY:12th ASVB Scientific Meeting (proposed)
+LOCATION:Macau University of Science and Technology\, Macao\, China
+DESCRIPTION:Scientific sessions on 23 August and the morning of 24 August.
+  Proposed venue and dates. See the first announcement.
+END:VEVENT
+END:VCALENDAR

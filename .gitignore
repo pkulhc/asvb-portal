@@ -1,0 +1,7 @@
+.openai/
+.sites-runtime/
+.sites-checkout*/
+node_modules/
+Codex_temp/
+.DS_Store
+Thumbs.db

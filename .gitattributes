@@ -1,0 +1,11 @@
+* text=auto
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.ics -text whitespace=trailing-space,cr-at-eol
+*.docx binary
+*.pdf binary
+*.png binary
+*.webp binary
+*.woff2 binary
