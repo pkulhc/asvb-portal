@@ -14,6 +14,10 @@ export const sources = {
 
 export const secretariat = 'pharmc@sustech.edu.cn';
 export const wechat = 'luhaocheng002';
+export const membership = [
+  '学会会员来自中国大陆、香港、澳门和台湾，以及日本、韩国、新加坡和马来西亚。',
+  'The Society’s members come from mainland China, Hong Kong, Macao and Taiwan, as well as Japan, South Korea, Singapore and Malaysia.'
+];
 
 export const records = [
   {

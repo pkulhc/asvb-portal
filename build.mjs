@@ -1,12 +1,12 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sources, records, history, secretariat, wechat } from './content.mjs';
+import { sources, records, history, membership, secretariat, wechat } from './content.mjs';
 
 const output = join(dirname(fileURLToPath(import.meta.url)), 'dist');
 const copy = {
-  zh: { name: '亚洲血管生物学学会', home: '首页', society: '学会介绍', next: '澳门 2027', archive: '历届会议', contact: '参会咨询', resources: '资料与图片', menu: '导航菜单', skip: '跳到正文', recap: '会议回顾', detail: '阅读会后报道' },
-  en: { name: 'Asian Society for Vascular Biology', home: 'Home', society: 'Society', next: 'Macao 2027', archive: 'Past meetings', contact: 'Meeting enquiries', resources: 'Sources & credits', menu: 'Navigation menu', skip: 'Skip to content', recap: 'Meeting archive', detail: 'Read the meeting report' }
+  zh: { name: '亚洲血管生物学学会', home: '首页', society: '学会介绍', next: '澳门 2027', archive: '历届会议', sponsorship: '赞助招商', contact: '参会咨询', resources: '资料与图片', menu: '导航菜单', skip: '跳到正文', recap: '会议回顾', detail: '阅读会后报道' },
+  en: { name: 'Asian Society for Vascular Biology', home: 'Home', society: 'Society', next: 'Macao 2027', archive: 'Past meetings', sponsorship: 'Sponsorship', contact: 'Meeting enquiries', resources: 'Sources & credits', menu: 'Navigation menu', skip: 'Skip to content', recap: 'Meeting archive', detail: 'Read the meeting report' }
 };
 const icons = {
   globe: '<circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>',
@@ -45,7 +45,8 @@ function header(v) {
     [c.home, 'index.html', page === 'index'],
     [c.society, 'society.html', page === 'society'],
     [c.next, 'macao-2027.html', page === 'macao-2027'],
-    [c.archive, v.archive, records.some(r => r.id === page)]
+    [c.archive, v.archive, records.some(r => r.id === page)],
+    [c.sponsorship, 'sponsorship.html', page === 'sponsorship']
   ];
   return `<a class="skip" href="#main">${c.skip}</a>
     <header class="masthead" id="top"><div class="wrap header-inner">
@@ -55,7 +56,7 @@ function header(v) {
       </a>
       <div class="header-tools">
         <nav class="site-nav" id="site-nav" aria-label="${v.t('网站导航','Site navigation')}">
-          ${tabs.map(([name,href,active])=>`<a href="${href}"${active?' class="is-current" aria-current="'+(page==='index'||page==='society'||page==='macao-2027'?'page':'location')+'"':''}>${name}</a>`).join('')}
+          ${tabs.map(([name,href,active])=>`<a href="${href}"${active?' class="is-current" aria-current="'+(href===v.archive?'location':'page')+'"':''}>${name}</a>`).join('')}
         </nav>
         <a class="lang-toggle" data-language href="${v.alternate}" lang="${english?'zh-CN':'en'}" hreflang="${english?'zh-CN':'en'}" aria-label="${english?'切换到中文':'Switch to English'}">${icon('globe')}<span>${english?'中文':'EN'}</span></a>
         <a class="contact-top" href="macao-2027.html#contact">${c.contact}</a>
@@ -67,7 +68,7 @@ function footer(v) {
   const { c, t } = v;
   return `<footer class="footer"><div class="wrap">
     <div class="footer-main"><div><a href="index.html" class="footer-mark">ASVB</a><p>${c.name}</p></div>
-    <nav aria-label="${t('页脚导航','Footer navigation')}"><a href="society.html">${c.society}</a><a href="macao-2027.html">${c.next}</a><a href="${v.archive}">${c.archive}</a></nav>
+    <nav aria-label="${t('页脚导航','Footer navigation')}"><a href="society.html">${c.society}</a><a href="macao-2027.html">${c.next}</a><a href="${v.archive}">${c.archive}</a><a href="sponsorship.html">${c.sponsorship}</a></nav>
     <div class="footer-contact"><span>${t('大会秘书处','Meeting secretariat')}</span><a href="mailto:${secretariat}">${secretariat}</a></div></div>
     <div class="footer-line"><span>© 2026 Asian Society for Vascular Biology</span><a href="sources.html">${c.resources}</a></div>
   </div></footer>`;
@@ -124,6 +125,7 @@ function home(v) {
     <section id="society" class="society-section"><div class="wrap society-grid">
       <div class="society-copy">${label('THE SOCIETY')}<h2>${t('亚洲血管生物学学会','Asian Society for<br>Vascular Biology')}</h2>
         <p class="body-copy">${t('2005 年，首届 ASVB 学术会议在上海举行。学会汇聚亚太地区研究血管的基础科学家、临床研究者和青年学者，共同探讨血管功能、疾病机制与医学转化。','Since its first scientific meeting in Shanghai in 2005, ASVB has brought together basic scientists, clinicians and early-career researchers from across the Asia-Pacific to study vascular function and disease.')}</p>
+        <p class="body-copy">${v.value(membership)}</p>
         ${cite('society.html',t('了解学会与沿革','About the Society and its history'))}
       </div>${plate(v)}
     </div></section>
@@ -133,15 +135,17 @@ function home(v) {
     </div></section>
   </main>`;
 }
-function breadcrumb(v,name) {
-  return `<nav class="crumb" aria-label="${v.t('当前位置','Breadcrumb')}"><a href="index.html">${v.c.home}</a><span aria-hidden="true">/</span><span aria-current="page">${name}</span></nav>`;
+function breadcrumb(v,name,parent) {
+  const separator='<span aria-hidden="true">/</span>';
+  return `<nav class="crumb" aria-label="${v.t('当前位置','Breadcrumb')}"><a href="index.html">${v.c.home}</a>${separator}${parent?`<a href="${parent.href}">${parent.name}</a>${separator}`:''}<span aria-current="page">${name}</span></nav>`;
 }
 function society(v) {
   const { t } = v;
   return `<main id="main">
     <section class="paper-intro"><div class="wrap">${breadcrumb(v,v.c.society)}
       <div class="society-grid"><div>${label('THE SOCIETY')}<h1>${v.c.name}</h1>
-        <p class="lead">${t('ASVB 推动亚洲血管生物学与血管医学的研究、教育和学术交流，让大学、研究机构和医院的研究者在同一场会议上讨论共同的问题。','ASVB advances research, education and scientific exchange in vascular biology and medicine in Asia. Its meetings bring researchers from universities, institutes and hospitals into the same conversation.')}</p></div>${plate(v)}</div></div>
+        <p class="lead">${t('ASVB 推动亚洲血管生物学与血管医学的研究、教育和学术交流，让大学、研究机构和医院的研究者在同一场会议上讨论共同的问题。','ASVB advances research, education and scientific exchange in vascular biology and medicine in Asia. Its meetings bring researchers from universities, institutes and hospitals into the same conversation.')}</p>
+        <p class="body-copy">${v.value(membership)}</p></div>${plate(v)}</div></div>
     </section>
     <section class="wrap editorial-section"><div class="split-intro">${label('SCIENTIFIC EXCHANGE')}<div><h2>${t('学会的工作','The work of the Society')}</h2>
       <p>${t('在学术会议上，基础科学家讨论血管内皮、平滑肌与周围组织如何调控血管功能，临床研究者带来疾病机制和治疗中的问题。纪念讲座、专题报告和壁报让这些问题在不同学科之间展开。','Scientific sessions connect work on the endothelium, vascular muscle and surrounding tissues with clinical questions about mechanisms and treatment. Named lectures, focused talks and posters give members several ways to discuss their findings.')}</p>
@@ -194,7 +198,7 @@ function meeting(v) {
             <div><dt>${t('学术委员会主席','Academic Committee Chair')}</dt><dd>${t('汪南平','Nanping Wang')}</dd></div>
             <div><dt>${t('大会秘书长','Conference Secretary-General')}</dt><dd>${t('鲁昊骋','Haocheng Lu')}</dd></div>
           </dl>
-        </section><section id="contact" class="contact-panel">${label(t('会务联系','CONTACT'))}<h2>${t('大会秘书处','Meeting secretariat')}</h2><p>${t('大会秘书长／会务联系人：鲁昊骋。参会意向、邀请函及学术交流事宜，请通过以下邮箱联系。欢迎相关企业及机构洽谈会议赞助与展位合作。','Conference Secretary-General / Conference Contact: Haocheng Lu. For attendance, invitation letters and programme enquiries, please use the email below. Companies and institutions are welcome to discuss sponsorship and exhibition opportunities.')}</p><div class="contact-rows"><a class="mail-link" href="mailto:${secretariat}?subject=ASVB%202027%20enquiry">${icon('mail')}${secretariat}</a><span class="wechat-line">${icon('chat')}${t('微信','WeChat')} · ${wechat}</span></div></section>
+        </section><section id="contact" class="contact-panel">${label(t('会务联系','CONTACT'))}<h2>${t('大会秘书处','Meeting secretariat')}</h2><p>${t('大会秘书长／会务联系人：鲁昊骋。参会意向、邀请函及学术交流事宜，请通过以下邮箱联系。','Conference Secretary-General / Conference Contact: Haocheng Lu. For attendance, invitation letters and programme enquiries, please use the email below.')}</p><div class="contact-rows"><a class="mail-link" href="mailto:${secretariat}?subject=ASVB%202027%20enquiry">${icon('mail')}${secretariat}</a><span class="wechat-line">${icon('chat')}${t('微信','WeChat')} · ${wechat}</span></div><p class="partner-invitation">${t('欢迎相关企业及机构洽谈会议赞助与展位合作。','Companies and institutions are welcome to discuss sponsorship and exhibition opportunities.')} ${cite('sponsorship.html',t('查看赞助招商','Sponsorship and exhibition enquiries'))}</p></section>
         <section id="share" class="share-section"><h2>${t('会议宣传图','Share the meeting')}</h2>
           <p>${t('下载图片即可转发。图中的二维码直达本页，方便同行查看澳门会议通知。','Download the graphic to share with colleagues. Its QR code links directly to this announcement.')}</p>
           <figure><img loading="lazy" width="1200" height="630" src="${v.root}${meetingGraphic(v)}" alt="${t('澳门 2027 第十二届 ASVB 学术会议宣传图，含拟定会期、会场及会议网址二维码','Macao 2027 meeting graphic with the planned dates, venue and a QR code linking to this page')}"></figure>
@@ -202,6 +206,49 @@ function meeting(v) {
           <p class="share-status" role="status"></p>
         </section>
       </div></div>
+  </main>`;
+}
+function sponsorship(v) {
+  const {t,c} = v;
+  const previous = records.find(r=>r.id==='singapore-2026');
+  const options = [
+    {
+      title: t('会议赞助','Meeting sponsorship'),
+      detail: t('有意支持本届学术会议的企业和机构，可向组委会介绍合作设想、希望支持的活动，以及需要了解的赞助安排。','If your organization would like to support the scientific meeting, tell the committee which activities interest you and what kind of support you have in mind.'),
+      action: t('咨询会议赞助','Enquire about sponsorship'),
+      prompt: t('我们希望支持的活动或合作设想是……','We are interested in supporting…')
+    },
+    {
+      title: t('展位合作','Exhibiting at the meeting'),
+      detail: t('希望参展的单位可简要介绍拟展示的产品、技术或服务，并向组委会咨询展位规格、费用和布展时间。','Tell the committee about the products, technologies or services you would like to exhibit. You can also ask about stand dimensions, costs and set-up times.'),
+      action: t('咨询展位合作','Enquire about exhibiting'),
+      prompt: t('我们拟展示的产品、技术或服务是……','We would like to exhibit…')
+    }
+  ];
+  function enquiry(option) {
+    const subject = t(`澳门 ASVB 2027 · ${option.title}`,`ASVB Macao 2027 | ${option.title}`);
+    const body = t(
+      `组委会老师，您好！\r\n\r\n我是[单位名称]的[姓名]。${option.prompt}\r\n\r\n欢迎通过[邮箱或电话]与我联系。`,
+      `Dear Organizing Committee,\r\n\r\nMy name is [name] and I represent [organization]. ${option.prompt}\r\n\r\nYou can reach me at [email or phone].`
+    );
+    return `mailto:${secretariat}?subject=${encodeURIComponent(subject)}&amp;body=${encodeURIComponent(body)}`;
+  }
+  return `<main id="main">
+    <section class="paper-intro sponsor-intro"><div class="wrap">${breadcrumb(v,c.sponsorship,{href:'macao-2027.html',name:c.next})}
+      <div class="sponsor-hero"><div>${label(t('澳门 2027 · 第十二届 ASVB 学术会议','MACAO 2027 · 12TH ASVB SCIENTIFIC MEETING'))}
+        <h1>${t('赞助招商','Sponsorship and exhibition')}</h1>
+        <p class="lead">${t('第十二届亚洲血管生物学学会会议将汇集从事血管基础与临床研究的学者。欢迎有意赞助会议或参展的企业和机构与组委会洽谈。','The 12th Scientific Meeting of the Asian Society for Vascular Biology will bring together vascular biologists and clinical researchers. We invite companies and institutions to sponsor the meeting or exhibit in Macao.')}</p>
+        <ul class="sponsor-facts"><li>${icon('calendar')}${t('拟定会期 · 2027 年 8 月 23–24 日','Proposed dates · 23–24 August 2027')}</li><li>${icon('pin')}${t('拟定会场 · 澳门科技大学','Proposed venue · Macau University of Science and Technology')}</li></ul>
+        <a class="btn sponsor-button" href="#enquiries">${icon('mail')}${t('联系大会秘书处','Contact the secretariat')}</a></div>
+        <figure class="sponsor-photo"><img width="1640" height="716" src="${v.root}assets/${previous.image}" alt="${v.value(previous.alt)}"><figcaption><a href="${route(previous.id)}">${t('第十一届 ASVB 学术会议合影 · 新加坡，2026','Delegates at the 11th ASVB Scientific Meeting · Singapore, 2026')}</a></figcaption></figure>
+      </div></div></section>
+    <div class="wrap sponsor-layout"><section class="sponsor-options" aria-labelledby="opportunities"><h2 id="opportunities">${t('合作方式','Ways to participate')}</h2>
+      ${options.map(option=>`<article><h3>${option.title}</h3><div><p>${option.detail}</p>${cite(enquiry(option),option.action)}</div></article>`).join('')}</section>
+      <aside id="enquiries" class="sponsor-contact" aria-labelledby="enquiries-title"><h2 id="enquiries-title">${t('招商联系','Partnership enquiries')}</h2>
+        <p class="sponsor-person"><strong>${t('鲁昊骋','Haocheng Lu')}</strong><span>${t('大会秘书长','Conference Secretary-General')}</span></p>
+        <dl><dt>${t('邮箱','Email')}</dt><dd><a href="mailto:${secretariat}">${secretariat}</a></dd><dt>${t('微信','WeChat')}</dt><dd>${wechat}</dd></dl>
+        ${download(v,'ASVB2027-first-announcement.docx',t('下载第一轮通知','Download the first announcement'))}
+      </aside></div>
   </main>`;
 }
 function recordPage(v,r) {
@@ -239,6 +286,7 @@ const pages = {
   index: [home, ['学会与学术会议','Society and scientific meetings']],
   society: [society, ['学会介绍与会议沿革','About the Society']],
   'macao-2027': [meeting, ['第十二届会议 · 澳门 2027','12th Scientific Meeting · Macao 2027']],
+  sponsorship: [sponsorship, ['赞助招商 · 澳门 2027','Sponsorship and exhibition · Macao 2027']],
   ...Object.fromEntries(records.map(r=>[r.id, [v=>recordPage(v,r), [r.edition[0]+' · '+r.city[0]+' '+r.year,r.edition[1]+' · '+r.city[1]+' '+r.year]]])),
   sources: [credits, ['资料与图片','Sources and credits']]
 };
@@ -246,10 +294,11 @@ const escapeAttribute = (text) => text.replaceAll('&','&amp;').replaceAll('"','&
 function pageMetadata(v, title) {
   const {page,t,value} = v;
   const record = records.find(r=>r.id===page);
-  const isMacao = page==='index' || page==='macao-2027';
+  const isMacao = page==='index' || page==='macao-2027' || page==='sponsorship';
   const description = record ? `${value(record.edition)} · ${value(record.city)} ${record.year} · ${value(record.theme)}` : {
     index: t('亚洲血管生物学学会、澳门 2027 学术会议通知，以及深圳和新加坡会议回顾。','The Asian Society for Vascular Biology, the Macao 2027 meeting announcement, and reports from Shenzhen and Singapore.'),
     'macao-2027': t('第十二届 ASVB 学术会议拟于 2027 年 8 月 23–24 日在澳门科技大学举行。查看第一轮通知、拟定日程、参会回执及摘要模板。','The 12th ASVB meeting is planned for 23–24 August 2027 at Macau University of Science and Technology. Find the first announcement, programme, attendance form and abstract template.'),
+    sponsorship: t('联系 ASVB 大会秘书处，洽谈澳门 2027 第十二届学术会议的会议赞助和展位合作。','Contact the ASVB meeting secretariat about sponsorship and exhibiting at the 12th Scientific Meeting in Macao in 2027.'),
     society: t('亚洲血管生物学学会的宗旨、学术交流与自 2005 年起的会议沿革。','The aims of the Asian Society for Vascular Biology and its scientific meetings since 2005.'),
     sources: t('ASVB 学术会议的文献出处、原始通知、摄影与图版署名。','Original announcements, sources for ASVB meeting themes, and photography and illustration credits.')
   }[page];

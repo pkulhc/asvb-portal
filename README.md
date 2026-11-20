@@ -2,7 +2,7 @@
 
 亚洲血管生物学学会的中英文学术门户。首页介绍学会及拟在澳门举行的第十二届学术会议，并收录新加坡第十一届和深圳第十届会议回顾。
 
-[访问中文网站](https://pkulhc.github.io/asvb-portal/) · [English website](https://pkulhc.github.io/asvb-portal/en/) · [第十二届会议](https://pkulhc.github.io/asvb-portal/macao-2027.html)
+[访问中文网站](https://pkulhc.github.io/asvb-portal/) · [English website](https://pkulhc.github.io/asvb-portal/en/) · [第十二届会议](https://pkulhc.github.io/asvb-portal/macao-2027.html) · [赞助招商](https://pkulhc.github.io/asvb-portal/sponsorship.html)
 
 ![澳门 2027 会议宣传网站首页](preview.webp)
 
