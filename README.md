@@ -2,7 +2,7 @@
 
 亚洲血管生物学学会的中英文学术门户。首页介绍学会及拟在澳门举行的第十二届学术会议，并收录新加坡第十一届和深圳第十届会议回顾。
 
-[访问中文网站](https://pkulhc.github.io/asvb-portal/) · [English website](https://pkulhc.github.io/asvb-portal/en/) · [第十二届会议](https://pkulhc.github.io/asvb-portal/macao-2027.html) · [赞助招商](https://pkulhc.github.io/asvb-portal/sponsorship.html)
+[English website](https://pkulhc.github.io/asvb-portal/) · [访问中文网站](https://pkulhc.github.io/asvb-portal/zh.html) · [第十二届会议](https://pkulhc.github.io/asvb-portal/macao-2027.html) · [赞助招商](https://pkulhc.github.io/asvb-portal/sponsorship.html)
 
 ![澳门 2027 会议宣传网站首页](preview.webp)
 
@@ -10,7 +10,7 @@
 
 ## 浏览
 
-下载或克隆仓库后，用浏览器打开 [中文首页](dist/index.html) 或 [English home](dist/en/index.html)。图片、字体、第一轮通知、参会回执、摘要模板及会议日历均随网站提供。澳门会议页提供中英文宣传图，二维码直达对应语言的会议通知。历届会议主题出处及图片许可见[资料与图片](dist/sources.html)。
+下载或克隆仓库后，用浏览器打开 [English home](dist/index.html) 或 [中文首页](dist/zh.html)。图片、字体、第一轮通知、参会回执、摘要模板及会议日历均随网站提供。澳门会议页提供中英文宣传图，二维码直达对应语言的会议通知。历届会议主题出处及图片许可见[资料与图片](dist/sources.html)。
 
 本机预览可在仓库根目录运行下列命令，然后在浏览器中访问 <http://127.0.0.1:8000/>。
 

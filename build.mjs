@@ -28,30 +28,38 @@ const cite = (href, name) => `<a class="text-link" href="${href}">${name}</a>`;
 const titleTheme = ['血管健康与疾病发生：机制与转化前沿探索', 'Vascular Health and Disease Pathogenesis: Exploring Mechanistic and Translational Frontiers'];
 const route = (id) => `${id}.html`;
 const publicBase = 'https://pkulhc.github.io/asvb-portal/';
-const publicPage = (lang, page) => publicBase + (lang === 'en' ? 'en/' : '') + (page === 'index' ? '' : route(page));
+const homeFile = { zh: 'zh.html', en: 'index.html' };
+function publicPage(lang, page) {
+  if (page === 'index') return publicBase + (lang === 'en' ? '' : homeFile.zh);
+  return publicBase + (lang === 'en' ? 'en/' : '') + route(page);
+}
 const meetingGraphic = (v) => `assets/macao-2027-${v.lang}.jpg`;
-function context(lang, page) {
+function context(lang, page, englishAtRoot = false) {
   const english = lang === 'en';
+  const root = english && !englishAtRoot ? '../' : '';
+  const homeHref = root + homeFile[lang];
+  const alternateLang = english ? 'zh' : 'en';
   return {
-    lang, page, english, c: copy[lang], root: english ? '../' : '',
+    lang, page, english, c: copy[lang], root, homeHref,
+    href: (path) => (englishAtRoot ? 'en/' : '') + path,
     t: (zh, en) => english ? en : zh, value: pair => pair[english ? 1 : 0],
-    archive: page === 'index' ? '#archive' : 'index.html#archive',
-    alternate: (english ? '../' : 'en/') + route(page)
+    archive: page === 'index' ? '#archive' : homeHref + '#archive',
+    alternate: root + (page === 'index' ? homeFile[alternateLang] : (english ? '' : 'en/') + route(page))
   };
 }
 
 function header(v) {
-  const { c, page, root, english } = v;
+  const { c, page, root, english, href } = v;
   const tabs = [
-    [c.home, 'index.html', page === 'index'],
-    [c.society, 'society.html', page === 'society'],
-    [c.next, 'macao-2027.html', page === 'macao-2027'],
+    [c.home, v.homeHref, page === 'index'],
+    [c.society, href('society.html'), page === 'society'],
+    [c.next, href('macao-2027.html'), page === 'macao-2027'],
     [c.archive, v.archive, records.some(r => r.id === page)],
-    [c.sponsorship, 'sponsorship.html', page === 'sponsorship']
+    [c.sponsorship, href('sponsorship.html'), page === 'sponsorship']
   ];
   return `<a class="skip" href="#main">${c.skip}</a>
     <header class="masthead" id="top"><div class="wrap header-inner">
-      <a class="brand" href="index.html" aria-label="${c.name} · ${c.home}">
+      <a class="brand" href="${v.homeHref}" aria-label="${c.name} · ${c.home}">
         <img width="55" height="55" src="${root}assets/society-logo.png" alt="">
         <span class="brand-lockup"><b>ASVB</b><span>${c.name}</span></span>
       </a>
@@ -60,18 +68,18 @@ function header(v) {
           ${tabs.map(([name,href,active])=>`<a href="${href}"${active?' class="is-current" aria-current="'+(href===v.archive?'location':'page')+'"':''}>${name}</a>`).join('')}
         </nav>
         <a class="lang-toggle" data-language href="${v.alternate}" lang="${english?'zh-CN':'en'}" hreflang="${english?'zh-CN':'en'}" aria-label="${english?'切换到中文':'Switch to English'}">${icon('globe')}<span>${english?'中文':'EN'}</span></a>
-        <a class="contact-top" href="macao-2027.html#contact">${c.contact}</a>
+        <a class="contact-top" href="${href('macao-2027.html#contact')}">${c.contact}</a>
         <button class="menu-toggle" type="button" aria-label="${c.menu}" aria-controls="site-nav" aria-expanded="false">${icon('menu')}${icon('close')}</button>
       </div>
     </div></header>`;
 }
 function footer(v) {
-  const { c, t, root } = v;
+  const { c, t, root, href } = v;
   return `<footer class="footer"><div class="wrap">
-    <div class="footer-main"><div class="footer-brand"><a href="index.html" class="footer-mark">ASVB</a><p>${c.name}</p></div>
-    <nav aria-label="${t('页脚导航','Footer navigation')}"><a href="society.html">${c.society}</a><a href="macao-2027.html">${c.next}</a><a href="${v.archive}">${c.archive}</a><a href="sponsorship.html">${c.sponsorship}</a><a href="${root}downloads/ASVB2027-first-announcement.docx" download>${t('第一轮通知','First announcement')}</a></nav>
+    <div class="footer-main"><div class="footer-brand"><a href="${v.homeHref}" class="footer-mark">ASVB</a><p>${c.name}</p></div>
+    <nav aria-label="${t('页脚导航','Footer navigation')}"><a href="${href('society.html')}">${c.society}</a><a href="${href('macao-2027.html')}">${c.next}</a><a href="${v.archive}">${c.archive}</a><a href="${href('sponsorship.html')}">${c.sponsorship}</a><a href="${root}downloads/ASVB2027-first-announcement.docx" download>${t('第一轮通知','First announcement')}</a></nav>
     <div class="footer-contact"><span>${t('大会秘书处','Meeting secretariat')}</span><a href="mailto:${secretariat}">${secretariat}</a><span>${t('微信','WeChat')} · ${wechat}</span></div></div>
-    <div class="footer-line"><span>© 2026 Asian Society for Vascular Biology</span><a href="sources.html">${c.resources}</a></div>
+    <div class="footer-line"><span>© 2026 Asian Society for Vascular Biology</span><a href="${href('sources.html')}">${c.resources}</a></div>
   </div></footer>`;
 }
 function cityCredit(v) {
@@ -83,7 +91,7 @@ function plate(v) {
   </figure>`;
 }
 function archiveCard(v,r) {
-  return `<a href="${route(r.id)}" class="record-card">
+  return `<a href="${v.href(route(r.id))}" class="record-card">
     <div class="record-image ${r.id}"><img loading="lazy" width="1640" height="${r.year==='2026'?'716':'1093'}" src="${v.root}assets/${r.image}" alt="${v.value(r.alt)}"></div>
     <div class="record-heading"><div><span class="record-edition">${v.value(r.edition)}</span><h3>${v.value(r.city)} <em>${r.year}</em></h3></div><span class="record-link">${v.t('会议回顾','Read recap')}</span></div>
     <p class="record-meta">${v.value(r.date)} · ${v.value(r.venue)}</p>
@@ -111,36 +119,36 @@ function enquiry(v, kind) {
   return `mailto:${secretariat}?subject=${encodeURIComponent(subject)}&amp;body=${encodeURIComponent(body)}`;
 }
 function home(v) {
-  const { t, root, c } = v;
+  const { t, root, c, href } = v;
   return `<main id="main">
     <section class="hero home-hero" aria-labelledby="hero-title">
       <div class="home-hero-media"><img class="hero-image" width="1817" height="866" fetchpriority="high" src="${root}assets/macao-blue-hour-hero.webp" alt="${t('澳门塔和新葡京建筑映照在蓝调时分的水面上','Macao Tower and Grand Lisboa reflected in the waterfront at blue hour')}"><div class="hero-shade"></div>
-        <p class="city-credit"><span>${icon('pin')}<a href="sources.html#home-panorama">${t('中国澳门 · AI 生成图','Macao, China · AI-generated image')}</a></span></p></div>
+        <p class="city-credit"><span>${icon('pin')}<a href="${href('sources.html#home-panorama')}">${t('中国澳门 · AI 生成图','Macao, China · AI-generated image')}</a></span></p></div>
       <div class="wrap hero-inner">
         <div class="hero-copy">${label(t('第十二届学术会议 · 第一轮通知','12th Scientific Meeting · First announcement'))}
           <h1 id="hero-title">${t('澳门','Macao')} <em>2027</em></h1>
           <p class="hero-meeting">${t('第十二届亚洲血管生物学学会会议','The 12th Scientific Meeting of the Asian Society for Vascular Biology')}</p>
           <p class="hero-theme">${v.value(titleTheme)}</p>
           <dl class="hero-facts">${meetingFacts(v).slice(0,2).map(([sym,term,def])=>`<div>${icon(sym)}<dt>${term}</dt><dd>${def}</dd></div>`).join('')}</dl>
-          <div class="hero-actions"><a class="btn btn-gold" href="macao-2027.html#announcement">${t('查看会议通知','Read the announcement')}</a><a class="btn btn-glass" href="${root}downloads/ASVB2027-first-announcement.docx" download>${icon('download')}${t('下载第一轮通知','Download announcement')}</a></div>
+          <div class="hero-actions"><a class="btn btn-gold" href="${href('macao-2027.html#announcement')}">${t('查看会议通知','Read the announcement')}</a><a class="btn btn-glass" href="${root}downloads/ASVB2027-first-announcement.docx" download>${icon('download')}${t('下载第一轮通知','Download announcement')}</a></div>
         </div>
       </div>
     </section>
     <section class="resource-band" aria-labelledby="resource-title"><div class="wrap">
       <h2 id="resource-title">${t('澳门参会资料','Meeting documents')}</h2>
-      <div class="resource-links">${meetingFiles(v).map(([file,name])=>`<a href="${root}downloads/${file}" download>${icon(file.endsWith('.ics')?'calendar':'download')}${name}</a>`).join('')}<a href="macao-2027.html#share">${icon('share')}${t('会议宣传图','Meeting graphic')}</a></div>
+      <div class="resource-links">${meetingFiles(v).map(([file,name])=>`<a href="${root}downloads/${file}" download>${icon(file.endsWith('.ics')?'calendar':'download')}${name}</a>`).join('')}<a href="${href('macao-2027.html#share')}">${icon('share')}${t('会议宣传图','Meeting graphic')}</a></div>
     </div></section>
     <nav class="home-paths wrap" aria-label="${t('快速入口','Explore')}">
-      <a href="macao-2027.html"><small>${t('第十二届会议','12th meeting')}</small><b>${t('澳门 2027 会议信息','Macao 2027 meeting')}</b><span>${t('日程、回执、摘要、住宿交通与联系','Programme, forms, abstracts, travel and contacts')}</span></a>
+      <a href="${href('macao-2027.html')}"><small>${t('第十二届会议','12th meeting')}</small><b>${t('澳门 2027 会议信息','Macao 2027 meeting')}</b><span>${t('日程、回执、摘要、住宿交通与联系','Programme, forms, abstracts, travel and contacts')}</span></a>
       <a href="#society"><small>${t('学会','The Society')}</small><b>${t('学会介绍','About ASVB')}</b><span>${t('宗旨、会员来源与会议沿革','Aims, membership and meeting history')}</span></a>
       <a href="#archive"><small>${t('2025 · 2026','2025 · 2026')}</small><b>${c.archive}</b><span>${t('深圳与新加坡会议回顾','Shenzhen and Singapore reports')}</span></a>
-      <a href="sponsorship.html"><small>${t('合作','Partners')}</small><b>${c.sponsorship}</b><span>${t('会议赞助与展位合作咨询','Sponsorship and exhibition enquiries')}</span></a>
+      <a href="${href('sponsorship.html')}"><small>${t('合作','Partners')}</small><b>${c.sponsorship}</b><span>${t('会议赞助与展位合作咨询','Sponsorship and exhibition enquiries')}</span></a>
     </nav>
     <section id="society" class="society-section"><div class="wrap society-grid">
       <div class="society-copy">${label(t('学会介绍','The Society'))}<h2>${t('亚洲血管生物学学会','Asian Society for<br>Vascular Biology')}</h2>
         <p class="body-copy">${t('2005 年，首届 ASVB 学术会议在上海举行。学会汇聚亚太地区研究血管的基础科学家、临床研究者和青年学者，共同探讨血管功能、疾病机制与医学转化。','Since its first scientific meeting in Shanghai in 2005, ASVB has brought together basic scientists, clinicians and early-career researchers from across the Asia-Pacific to study vascular function and disease.')}</p>
         <p class="body-copy">${v.value(membership)}</p>
-        ${cite('society.html',t('了解学会与会议沿革','About the Society and its history'))}
+        ${cite(href('society.html'),t('了解学会与会议沿革','About the Society and its history'))}
       </div>${plate(v)}
     </div></section>
     <section id="archive" class="archive-section"><div class="wrap">
@@ -149,13 +157,13 @@ function home(v) {
     </div></section>
     <section class="partner-band" aria-labelledby="partner-title"><div class="wrap">
       <div><h2 id="partner-title">${t('会议赞助与展位合作','Sponsorship and exhibition')}</h2><p>${t('欢迎相关企业及机构与大会秘书处洽谈澳门 2027 的会议赞助和展位合作。','Companies and institutions are welcome to discuss sponsoring or exhibiting at Macao 2027 with the meeting secretariat.')}</p></div>
-      <a class="btn btn-gold" href="sponsorship.html">${t('了解赞助招商','Sponsorship and exhibition')}</a>
+      <a class="btn btn-gold" href="${href('sponsorship.html')}">${t('了解赞助招商','Sponsorship and exhibition')}</a>
     </div></section>
   </main>`;
 }
 function breadcrumb(v,name,parent) {
   const separator='<span aria-hidden="true">/</span>';
-  return `<nav class="crumb" aria-label="${v.t('当前位置','Breadcrumb')}"><a href="index.html">${v.c.home}</a>${separator}${parent?`<a href="${parent.href}">${parent.name}</a>${separator}`:''}<span aria-current="page">${name}</span></nav>`;
+  return `<nav class="crumb" aria-label="${v.t('当前位置','Breadcrumb')}"><a href="${v.homeHref}">${v.c.home}</a>${separator}${parent?`<a href="${parent.href}">${parent.name}</a>${separator}`:''}<span aria-current="page">${name}</span></nav>`;
 }
 function society(v) {
   const { t, value, english } = v;
@@ -336,7 +344,7 @@ function recordPage(v,r) {
       ${r.id==='singapore-2026'?download(v,'ASVB2026-programme.pdf',t('下载会前日程','Download the pre-meeting programme'),'PDF'):''}
     </div></div></section>
     ${r.gallery?`<section class="gallery-section" aria-labelledby="gallery-title"><div class="wrap"><h2 id="gallery-title">${t('会议现场','At the meeting')}</h2><div class="gallery">${r.gallery.map(([file,w,h,cap,alt])=>`<figure><img loading="lazy" width="${w}" height="${h}" src="${root}assets/${file}" alt="${value(alt)}"><figcaption>${value(cap)}</figcaption></figure>`).join('')}</div></div></section>`:''}
-    <div class="archive-cross"><div class="wrap"><a href="index.html#archive">${t('返回历届会议','All past meetings')}</a><a href="${route(other.id)}">${value(other.edition)} · ${value(other.city)} ${other.year}</a></div></div>
+    <div class="archive-cross"><div class="wrap"><a href="${v.archive}">${t('返回历届会议','All past meetings')}</a><a href="${route(other.id)}">${value(other.edition)} · ${value(other.city)} ${other.year}</a></div></div>
   </main>`;
 }
 function credits(v) {
@@ -382,28 +390,35 @@ function pageMetadata(v, title) {
     : record ? value(record.alt) : v.c.name;
   return `<meta name="description" content="${escapeAttribute(description)}">
 <link rel="canonical" href="${publicPage(v.lang,page)}">
-<link rel="alternate" hreflang="zh-CN" href="${publicPage('zh',page)}"><link rel="alternate" hreflang="en" href="${publicPage('en',page)}"><link rel="alternate" hreflang="x-default" href="${publicPage('zh',page)}">
+<link rel="alternate" hreflang="zh-CN" href="${publicPage('zh',page)}"><link rel="alternate" hreflang="en" href="${publicPage('en',page)}"><link rel="alternate" hreflang="x-default" href="${publicPage('en',page)}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="Asian Society for Vascular Biology"><meta property="og:locale" content="${v.english?'en_GB':'zh_CN'}">
 <meta property="og:title" content="${escapeAttribute(title)}"><meta property="og:description" content="${escapeAttribute(description)}"><meta property="og:url" content="${publicPage(v.lang,page)}">
 <meta property="og:image" content="${publicBase+path}"><meta property="og:image:alt" content="${escapeAttribute(alt)}">${isMacao?'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">':''}
 <meta name="twitter:card" content="${isMacao||record?'summary_large_image':'summary'}">`;
 }
-for (const lang of ['zh','en']) {
-  const dir = lang === 'en' ? join(output,'en') : output;
-  mkdirSync(dir,{recursive:true});
-  for (const [page,[render,pageTitle]] of Object.entries(pages)) {
-    const v=context(lang,page), title=`${v.value(pageTitle)} | ASVB`, currentLang=v.english?'en':'zh-CN';
-    const html=`<!doctype html>
+function writePage(v, filepath) {
+  const [render,pageTitle] = pages[v.page];
+  const title = `${v.value(pageTitle)} | ASVB`;
+  const currentLang = v.english ? 'en' : 'zh-CN';
+  const html = `<!doctype html>
 <html lang="${currentLang}"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeAttribute(title)}</title>${pageMetadata(v,title)}<meta name="theme-color" content="#102a42">
 <link rel="icon" type="image/png" href="${v.root}assets/society-logo.png">
 <link rel="stylesheet" href="${v.root}site.css"><script src="${v.root}site.js" defer></script>
-</head><body class="page-${page}">${header(v)}${render(v)}${footer(v)}</body></html>`;
-    const clean = html.split('\n').map(line => line.trimEnd()).join('\n');
-    writeFileSync(join(dir,route(page)),clean+'\n');
+</head><body class="page-${v.page}">${header(v)}${render(v)}${footer(v)}</body></html>`;
+  const clean = html.split('\n').map(line => line.trimEnd()).join('\n');
+  writeFileSync(filepath, clean+'\n');
+}
+for (const lang of ['zh','en']) {
+  const dir = lang === 'en' ? join(output,'en') : output;
+  mkdirSync(dir,{recursive:true});
+  for (const page of Object.keys(pages)) {
+    const filename = page === 'index' ? homeFile[lang] : route(page);
+    writePage(context(lang,page),join(dir,filename));
   }
 }
+writePage(context('en','index',true),join(output,homeFile.en));
 const calendar=[
   'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//ASVB//Scientific Meetings//EN','CALSCALE:GREGORIAN','METHOD:PUBLISH',
   'BEGIN:VEVENT','UID:asvb-12-scientific-20270823@asvb.com.cn','DTSTAMP:20261120T000000Z','DTSTART;VALUE=DATE:20270823','DTEND;VALUE=DATE:20270825','STATUS:TENTATIVE','TRANSP:TRANSPARENT',
