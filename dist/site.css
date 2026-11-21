@@ -406,14 +406,12 @@ h3{font-size:1.35rem}
 /* ===== Home hero ===== */
 .home-hero{display:block;min-height:clamp(560px,45vw,700px)}
 .home-hero-media{position:absolute;inset:0;z-index:-1;overflow:hidden}
-.home-hero .hero-image{object-position:50% 34%}
+.home-hero .hero-image{object-position:85% 7%}
 .home-hero .hero-shade{background:
-  linear-gradient(90deg,rgba(9,18,34,0) 0%,rgba(9,18,34,0) 33%,rgba(9,19,35,.55) 47%,rgba(9,20,36,.88) 60%,rgba(9,20,36,.94) 100%),
-  linear-gradient(0deg,rgba(6,14,28,.72) 0%,transparent 26%),
-  linear-gradient(180deg,rgba(6,14,28,.35) 0%,transparent 18%)}
-.home-hero .city-credit{left:max(6vw,calc((100vw - 1240px)/2));right:auto;bottom:22px;text-align:left}
-.home-hero .city-credit>span{justify-content:flex-start}
-.home-hero .hero-inner{min-height:inherit;display:flex;align-items:center;justify-content:flex-end}
+  linear-gradient(90deg,#09182be8 0%,#09182bbf 30%,#09182b52 53%,transparent 70%),
+  linear-gradient(0deg,#060e1c91 0%,transparent 24%)}
+.home-hero .city-credit{right:max(5vw,calc((100% - 1240px)/2));bottom:22px}
+.home-hero .hero-inner{min-height:inherit;display:flex;align-items:center}
 .home-hero .hero-copy{width:min(47%,600px);padding:64px 0 72px}
 .home-hero h1{font-size:clamp(4.2rem,6.4vw,6.9rem);line-height:1.08;margin:16px 0 14px}
 :lang(en) .home-hero h1{font-size:clamp(5rem,7.4vw,7.8rem);line-height:1;margin:16px 0 16px}
@@ -537,9 +535,6 @@ h3{font-size:1.35rem}
 }
 @media(max-width:1030px){
   .home-hero .hero-copy{width:min(54%,560px)}
-  .home-hero .hero-shade{background:
-    linear-gradient(90deg,rgba(9,18,34,0) 0%,rgba(9,18,34,.1) 28%,rgba(9,19,35,.7) 44%,rgba(9,20,36,.93) 56%,rgba(9,20,36,.95) 100%),
-    linear-gradient(0deg,rgba(6,14,28,.72) 0%,transparent 26%)}
   .footer-main nav{display:flex;grid-column:1/-1;order:3}
   .home-paths{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sponsor-steps ol{grid-template-columns:1fr}
@@ -548,7 +543,7 @@ h3{font-size:1.35rem}
 @media(max-width:900px){
   .home-hero{min-height:0;background:#0d1f33}
   .home-hero-media{position:relative;inset:auto;z-index:0;height:clamp(220px,52vw,400px)}
-  .home-hero .hero-image{z-index:0;object-position:0% 36%;transform:scale(1.28);transform-origin:25% 46%}
+  .home-hero .hero-image{z-index:0}
   .home-hero .hero-shade{z-index:1;background:linear-gradient(0deg,#0d1f33 0%,rgba(13,31,51,.35) 22%,transparent 45%),linear-gradient(180deg,rgba(6,14,28,.35),transparent 20%)}
   .home-hero .city-credit{z-index:2;left:auto;right:5%;bottom:14px;text-align:right}
   .home-hero .hero-inner{min-height:0;display:block}
