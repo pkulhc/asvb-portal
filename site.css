@@ -182,6 +182,39 @@ h3{font-size:1.35rem}
 .timeline h3{margin-bottom:4px}
 .timeline h3 a{text-decoration:underline;text-decoration-color:#bca382;text-decoration-thickness:1px}
 .timeline p{line-height:1.75}
+.society-nav{background:#f5f4ef;border-bottom:1px solid var(--line)}
+.society-nav .wrap{display:flex;flex-wrap:wrap;gap:4px clamp(16px,3.5vw,52px);padding-block:12px}
+.society-nav a{display:block;padding:4px 0;color:#244b60;font-weight:600;font-size:.95rem}
+.mission-grid,.leadership-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px clamp(18px,4vw,60px)}
+.mission-grid>div{border-top:2px solid #b39a74;padding-top:14px}
+.mission-grid h3{margin-bottom:8px}
+.society-roster>h2{margin-bottom:24px}
+.leadership-grid h3{margin-bottom:13px}
+.office-history,.council-names{list-style:none;padding:0}
+.office-history li{border-top:1px solid var(--line);padding:12px 0 14px}
+.office-years{display:block;font-size:.85rem;font-weight:650;color:#76572d;margin-bottom:3px}
+.office-history strong{font-weight:650}
+.office-history strong a{text-decoration:underline;text-decoration-color:#bca382}
+.office-history li p{font-size:.95rem;line-height:1.65}
+.society-council{background:var(--paper);border-top:1px solid var(--line)}
+.society-council h2 small{display:inline-block;color:#87683f;font:italic 400 .76em/1 var(--display);white-space:nowrap}
+.society-council .society-roster>h2{margin-bottom:9px}
+.council-date{color:var(--muted);margin-bottom:20px;font-size:.95rem}
+.society-officers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 28px}
+.society-officers>div{background:white;border-top:2px solid #b39a74;padding:13px 15px}
+.society-officers dt{color:#76572d;font-weight:650;font-size:.85rem;margin-bottom:4px}
+.society-officers dd{display:grid;gap:2px}
+.society-officers dd small,.society-officers dd span{color:var(--muted);font-size:.85rem;line-height:1.5}
+.council-names{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 15px}
+.council-names li{padding:6px 0;border-top:1px solid var(--line);overflow-wrap:anywhere}
+.council-archive{margin-top:30px}
+.council-archive .disclosure+.disclosure{border-top:0;margin-top:0}
+.council-archive h4{margin:0 0 8px}
+.council-archive>.council-date{margin:16px 0 0}
+@media(max-width:700px){
+  .mission-grid,.leadership-grid,.society-officers{grid-template-columns:1fr}
+  .society-roster>h2{margin-bottom:15px}
+}
 .meeting-banner .wrap{position:relative;padding:25px 0 52px}
 .meeting-banner .crumb,.meeting-banner .crumb>span[aria-hidden]{color:#dae3e6}
 .meeting-banner .crumb{margin-bottom:32px}
