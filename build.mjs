@@ -105,8 +105,8 @@ function home(v) {
     ['ASVB2027-abstract.docx', t('摘要模板','Abstract template')]
   ];
   return `<main id="main">
-    <section class="hero">
-      <img class="hero-image" width="1920" height="899" fetchpriority="high" src="${root}assets/macao-waterfront.webp" alt="">
+    <section class="hero home-hero">
+      <img class="hero-image" width="1917" height="1279" fetchpriority="high" src="${root}assets/macao-tower-night.jpg" alt="">
       <div class="hero-shade"></div><div class="wrap hero-inner">
         <div class="hero-copy">${label('12TH SCIENTIFIC MEETING')}
           <h1>${t('澳门','Macao')} <em>2027</em></h1>
@@ -114,7 +114,7 @@ function home(v) {
           <p class="hero-theme">${v.value(titleTheme)}</p>
           <div class="hero-actions"><a class="btn btn-gold" href="macao-2027.html">${t('查看第一轮通知','First announcement')}</a><a class="btn btn-glass" href="macao-2027.html#programme">${t('浏览拟定日程','Explore the programme')}</a></div>
         </div>
-        ${cityCredit(v)}
+        <div class="city-credit"><span>${icon('pin')}${t('中国澳门 · 澳门塔','Macao Tower · Macao, China')}</span></div>
       </div>
     </section>
     ${infoStrip(v)}
@@ -277,7 +277,8 @@ function credits(v) {
       <h3 id="meeting-themes">${t('历届会议主题出处','Sources for meeting themes')}</h3>
       <p>${t('深圳第十届 ASVB 学术会议的英文主题见卞劲松主席 2026 年 6 月 12 日工作报告第 2 节。本站附中文译文。同期联合论坛的中文主题见南方科技大学医学院发布的第三轮通知。','The English theme for the 10th ASVB meeting in Shenzhen appears in section 2 of President Jinsong Bian’s report of 12 June 2026. This site provides a Chinese translation. The SUSTech School of Medicine’s third announcement gives the Chinese theme of the joint forum.')} ${cite(sources.shenzhenNotice,t('深圳联合会议第三轮通知','Shenzhen joint meeting announcement'))}</p>
       <p>${t('新加坡第十一届会议的英文主题见印刷版会议手册第 2 页主席欢迎辞，中文采用南方科技大学会后报道的原文。','The President’s welcome on page 2 of the printed Singapore programme gives the English theme. The Chinese wording follows the meeting report published by Southern University of Science and Technology.')} ${cite(sources.singapore,t('新加坡会后报道','Singapore meeting report'))}</p></section>
-      <section><h2>${t('影像与图版','Photography and illustration')}</h2><h3>${t('澳门南湾湖','Nam Van Lake, Macao')}</h3><p>${t('Diego Delso 摄于 2013 年。网页与宣传图采用裁切、缩放后的照片，改编图像沿用 CC BY-SA 3.0 许可。','Photograph by Diego Delso, 2013. The site and meeting graphics feature cropped and resized versions of the photograph. The adaptations are available under CC BY-SA 3.0.')} <a href="${sources.city}">${t('原作','Original')}</a> · <a href="${sources.artist}">delso.photo</a> · <a href="${sources.cityLicense}">${t('许可','Licence')}</a></p>
+      <section><h2>${t('影像与图版','Photography and illustration')}</h2><h3>${t('澳门塔夜景','Macao Tower at night')}</h3><p>${t('网站首页使用提供给 ASVB 网站的澳门塔夜景照片。','The home page features a night photograph of Macao Tower supplied to the ASVB website.')}</p>
+      <h3>${t('澳门南湾湖','Nam Van Lake, Macao')}</h3><p>${t('Diego Delso 摄于 2013 年。澳门会议页与宣传图采用裁切、缩放后的照片，改编图像沿用 CC BY-SA 3.0 许可。','Photograph by Diego Delso, 2013. The Macao meeting page and meeting graphics feature cropped and resized versions of the photograph. The adaptations are available under CC BY-SA 3.0.')} <a href="${sources.city}">${t('原作','Original')}</a> · <a href="${sources.artist}">delso.photo</a> · <a href="${sources.cityLicense}">${t('许可','Licence')}</a></p>
       <h3>${t('主动脉弓及其分支','The aortic arch and its branches')}</h3><p>H. V. Carter, <i>Gray’s Anatomy</i>, 1918, fig. 505. ${t('公有领域。','Public domain.')} <a href="${sources.plate}">${t('原书图版','Original plate')}</a> · <a href="${sources.plateLicense}">${t('公版说明','Rights information')}</a></p>
       <h3>${t('会议合影与会标','Meeting photographs and emblem')}</h3><p>${t('新加坡大会合影、深圳 ASVB 专场合影与学会会标来自 ASVB 会务资料。两届会后报道亦收录了对应现场影像。','The Singapore and Shenzhen photographs and the Society emblem are from the ASVB meeting archives. The respective post-meeting reports also document these gatherings.')}</p>
       <h3>${t('网页字体','Typefaces')}</h3><p>Instrument Serif · Noto Serif SC. <a href="${v.root}assets/LICENSE-InstrumentSerif.txt">Instrument Serif OFL</a> · <a href="${v.root}assets/LICENSE-NotoSerifSC.txt">Noto Serif SC OFL</a></p></section></div></div></main>`;

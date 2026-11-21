@@ -6,7 +6,7 @@
 
 ![澳门 2027 会议宣传网站首页](preview.webp)
 
-首页澳门夜景由 [Diego Delso](https://delso.photo/) 摄影。[原作](https://commons.wikimedia.org/wiki/File:Lago_Nam_Van,_Macao,_2013-08-08,_DD_04.jpg)采用 [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) 许可。
+澳门会议页和宣传图中的南湾湖夜景由 Diego Delso 摄影，采用 CC BY-SA 3.0 许可。[照片原作](https://commons.wikimedia.org/wiki/File:Lago_Nam_Van,_Macao,_2013-08-08,_DD_04.jpg) · [许可条款](https://creativecommons.org/licenses/by-sa/3.0/)
 
 ## 浏览
 

@@ -88,6 +88,13 @@ h3{font-size:1.35rem}
 .city-credit .icon{width:15px;height:15px}
 .city-credit small{font:400 .765rem/1.45 var(--sans);color:#e7edf0}
 .city-credit i{font-style:normal;margin:0 6px;opacity:.7}
+.home-hero .hero-image{object-position:center 30%}
+.home-hero .hero-shade{
+  background:linear-gradient(90deg,transparent 12%,#100f1b29 30%,#121322d4 58%,#101321ed 100%),
+             linear-gradient(0deg,#090d18ad,transparent 25%)
+}
+.home-hero .hero-copy{margin-inline-start:auto}
+.home-hero .city-credit{left:0;right:auto}
 .info-band{background:var(--paper);border-bottom:1px solid #dcded7}
 .info-grid{display:grid;grid-template-columns:1fr 1fr 1.16fr;align-items:stretch;padding:26px 0}
 .info-item{display:flex;align-items:center;gap:16px;padding:0 27px;border-left:1px solid #d6d8cf}
@@ -292,6 +299,8 @@ h3{font-size:1.35rem}
   .wrap{width:90%}
   .header-tools{gap:14px}.site-nav{gap:21px}.lang-toggle{padding-left:15px}
   .hero-copy{width:70%}
+  .home-hero .hero-copy{width:63%}
+  :lang(en) .home-hero h1{font-size:clamp(4.3rem,8.9vw,6.6rem)}
   .info-item{padding-inline:17px;gap:11px}
   .society-grid{gap:38px}.plate{min-height:284px}
   .meeting-layout{gap:39px}
@@ -323,6 +332,13 @@ h3{font-size:1.35rem}
   .hero .eyebrow,.meeting-banner .eyebrow{font-size:.73rem;letter-spacing:.18em}
   .hero h1{font-size:clamp(3.8rem,13vw,5.8rem);margin:15px 0}
   :lang(en) .hero h1{font-size:clamp(4.5rem,14.8vw,6.8rem);margin:17px 0}
+  .home-hero .hero-copy{width:100%;padding-block:42px 148px}
+  .home-hero .hero-image{object-position:6% center}
+  .home-hero .hero-shade{
+    background:linear-gradient(180deg,#101321b8 0%,#101321ad 43%,#11132140 77%,#0a0d17a6 100%),
+               linear-gradient(90deg,#10132169,transparent 80%)
+  }
+  :lang(en) .home-hero h1{font-size:clamp(4.2rem,14.5vw,6.8rem)}
   .hero-meeting{font-size:clamp(1.23rem,4.7vw,1.75rem);letter-spacing:.015em}
   :lang(en) .hero-meeting{font-size:1.9rem;max-width:96%}
   .hero-theme{margin-top:10px;font-size:1rem;max-width:93%}
