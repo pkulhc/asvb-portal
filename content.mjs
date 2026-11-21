@@ -1,5 +1,11 @@
 export const sources = {
   firstMeeting: 'https://www.chinaphar.com/announcement/view/104',
+  huangProfile: 'https://www.cuhk.edu.hk/proj/HuangLab/profile.html',
+  wangProfile: 'https://medgs.xjtu.edu.cn/info/1253/6328.htm',
+  hualien: 'https://www.conf.tw/site/page.aspx?lang=en&pid=901&sid=1096',
+  xian: 'https://pubmed.ncbi.nlm.nih.gov/23676334/',
+  kualaLumpur: 'https://hub.hku.hk/handle/10722/226384',
+  nanjing: 'https://www.cityu.edu.hk/bms/broadcast/news/20241226-yh-lecture.htm',
   shanghai: 'https://www.shsmu.edu.cn/news/info/1011/15228.htm',
   shenzhen: 'https://www.gdsta.cn/xhzc/ykxh/gdsylxh/xhdt110/content_47634',
   shenzhenNotice: 'https://mp.weixin.qq.com/s/y9G50P5hjH9jaP32kPW_BA',
@@ -18,6 +24,84 @@ export const membership = [
   '学会会员来自中国大陆、香港、澳门和台湾，以及日本、韩国、新加坡和马来西亚。',
   'The Society’s members come from mainland China, Hong Kong, Macao and Taiwan, as well as Japan, South Korea, Singapore and Malaysia.'
 ];
+
+export const mission = [
+  ['推动血管生物学与血管医学研究', 'Advance vascular biology and medicine',
+    '促进亚洲血管生物学与血管医学的发展，坚持高标准的研究、教育与学术交流。',
+    'Advance vascular biology and medicine in Asia and uphold high standards in research, education and scientific exchange.'],
+  ['支持教学与继续教育', 'Support teaching and continuing education',
+    '推动大学与研究机构开展血管生物学研究和教学，参与面向血管生物学研究者与临床医师的继续教育。',
+    'Foster research and teaching in universities and research institutes and support continuing education for vascular researchers and practising physicians.'],
+  ['促进学术交流与合作', 'Connect researchers and clinicians',
+    '通过学术会议、青年学者论坛和壁报交流，帮助基础研究者、临床医师和青年学者分享成果、建立合作。',
+    'Bring basic scientists, clinicians and early-career researchers together through scientific meetings, the Young Scholar Forum and poster sessions.'],
+  ['提供专业咨询', 'Provide scientific advice',
+    '应教育机构、政府部门及其他机构请求，按学会程序就相关专业问题提供咨询。',
+    'Advise educational institutions, government agencies and other organizations on relevant scientific matters when requested and as authorized by the Society.']
+];
+
+const leaders = {
+  vanhoutte: ['Paul M. Vanhoutte', 'Paul M. Vanhoutte'],
+  huang: ['黄聿', 'Yu Huang'],
+  wang: ['汪南平', 'Nanping Wang'],
+  bian: ['卞劲松', 'Jinsong Bian'],
+  chiu: ['裘正健', 'Jeng-Jiann Chiu'],
+  susan: ['梁慧心', 'Susan W.S. Leung'],
+  george: ['梁栢行', 'George P.H. Leung'],
+  lu: ['鲁昊骋', 'Haocheng Lu']
+};
+
+export const officers = [
+  [['主席','President'], leaders.bian, ['南方科技大学','Southern University of Science and Technology']],
+  [['荣誉主席','Honorary President'], leaders.huang, ['香港城市大学','City University of Hong Kong']],
+  [['秘书长','Secretary-General'], leaders.susan, ['香港大学','The University of Hong Kong']],
+  [['副秘书长','Deputy Secretary-General'], leaders.lu, ['南方科技大学','Southern University of Science and Technology']],
+  [['司库','Treasurer'], leaders.george, ['香港大学','The University of Hong Kong']]
+];
+
+export const presidents = [
+  [['创会时期','Founding years'], leaders.vanhoutte, ['创会主席，2005 年首届学术会议时在任。','Founding President, in office at the first scientific meeting in 2005.'], 'nanjing'],
+  [['2010–2018','2010–2018'], leaders.huang, ['曾任创会秘书长，2010 年接任主席。','Previously the founding Secretary-General, he became President in 2010.'], 'huangProfile'],
+  [['2018–2025','2018–2025'], leaders.wang, ['2018 年上海会员大会当选，2025 年深圳换届前仍任主席。','Elected in Shanghai in 2018 and chaired the 2025 General Assembly in Shenzhen before the leadership transition.'], 'nanjing'],
+  [['2025–2027','2025–2027'], leaders.bian, ['2025 年深圳会员大会确认本届任职。','The 2025 General Assembly in Shenzhen endorsed his appointment for the current term.'], 'singapore']
+];
+
+export const secretariesGeneral = [
+  [['2005–2010','2005–2010'], leaders.huang, ['创会秘书长。','Founding Secretary-General.'], 'huangProfile'],
+  [['2018 年前曾任','Served before 2018'], leaders.wang, ['西安交通大学履历记载曾任此职，任期起止待考。','His Xi’an Jiaotong University profile records his service in this role. Exact dates remain to be verified.'], 'wangProfile'],
+  [['2018 年当选','Elected in 2018'], leaders.chiu, ['上海会员大会确认的任期为 2018–2020 年，实际卸任时间待考。','The Shanghai General Assembly approved a 2018–2020 term. His exact departure date remains to be verified.']],
+  [['2025–2027','2025–2027'], leaders.susan, ['2025 年深圳会员大会确认本届任职，2026 年新加坡会议纪要继续列为秘书长。','Endorsed for the 2025–2027 term in Shenzhen and listed as Secretary-General in the 2026 Singapore minutes.']]
+];
+
+export const council = {
+  members: [
+    'Kenneth Kun-Yu Wu', leaders.wang[1], leaders.chiu[1], 'Masato Tsutsui', 'Ji-Ho Park',
+    'Yulong He', 'Maik Gollasch', 'Injune Kim', 'Dharmani Devi Murugan', 'Alex F. Chen',
+    'Roger S.Y. Foo', 'Yibin Wang', 'Pilhan Kim', 'Christine Cheung', 'Dongjun Lee'
+  ],
+  coOpted: [
+    'Kimio Satoh', 'Min Xia', 'Jack W.T. Wong', 'Yi Shi', 'Chia-Ching Wu', 'Wai San Cheang',
+    'Li Wang', 'Lei Xiao', 'Liping Xie', 'Tingting Zhang', 'Xiaoyu Tian', 'Suowen Xu', 'Yahan Liu', 'Shanshan Luo'
+  ],
+  archives: [
+    {
+      title: ['2025 年深圳会员大会名单','2025 General Assembly, Shenzhen'],
+      members: ['Hiroaki Shimokawa', 'Kenneth Kun-Yu Wu', leaders.george[1], leaders.huang[1], leaders.wang[1],
+        leaders.bian[1], 'Mohammad Rais Mustafa', leaders.chiu[1], 'Takeshi Adachi', 'Zuyi Yuan',
+        'Masato Tsutsui', 'Erdan Dong', 'Ji-Ho Park', 'Yulong He', 'Maik Gollasch', leaders.susan[1],
+        'Injune Kim', 'Dharmani Devi Murugan', 'You Mie Lee', 'Alex F. Chen'],
+      coOpted: ['Kimio Satoh', 'Min Xia', 'Jack W.T. Wong', 'Yi Shi', 'Chia-Ching Wu',
+        'Wai San Cheang', leaders.lu[1], 'Li Wang', 'Lei Xiao', 'Liping Xie', 'Tingting Zhang']
+    },
+    {
+      title: ['2018 年上海会员大会名单','2018 General Assembly, Shanghai'],
+      members: [leaders.vanhoutte[1], leaders.huang[1], 'Hiroaki Shimokawa', leaders.wang[1], leaders.george[1],
+        'Kenneth Kun-Yu Wu', leaders.bian[1], leaders.chiu[1], 'Mohammad Rais Mustafa', 'Zuyi Yuan',
+        'Masato Tsutsui', 'Erdan Dong', 'Ji-Ho Park', 'Yulong He'],
+      coOpted: ['Kimio Satoh', 'Min Xia', 'Jack W.T. Wong', 'Dharmani Devi Murugan', 'Yi Shi', 'Chia-Ching Wu']
+    }
+  ]
+};
 
 export const records = [
   {
@@ -73,10 +157,17 @@ export const records = [
 ];
 
 export const history = [
-  ['2005', ['上海', 'Shanghai'], ['首届 ASVB 学术会议汇聚亚太地区从事血管生物学与血管医学的基础和临床研究者。', 'The inaugural scientific meeting brought basic scientists and clinicians together to discuss vascular biology and disease.']],
-  ['2008', ['新加坡', 'Singapore'], ['第三届会议在新加坡国立大学举行。2026 年，第十一届会议重返同一座 MD11 报告厅。', 'The National University of Singapore hosted the third meeting. In 2026 the Society returned to the same MD11 Auditorium for its 11th meeting.']],
-  ['2018', ['上海', 'Shanghai'], ['第八届会议与中国病理生理学会血管医学专业委员会第三届学术研讨会联合举行。', 'The eighth meeting was held jointly with the third symposium of the vascular medicine committee of the Chinese Association of Pathophysiology.']],
-  ['2025', ['深圳', 'Shenzhen'], ['第十届会议与第二届血管稳态与疾病研究前沿论坛联合举行。', 'The 10th ASVB meeting joined the second Conference on Vascular Homeostasis and Diseases.'], 'shenzhen-2025'],
-  ['2026', ['新加坡', 'Singapore'], ['第十一届会议设 Paul M. Vanhoutte 纪念讲座和青年学者论坛。', 'The 11th meeting featured the Paul M. Vanhoutte Memorial Lecture and a Young Scholar Forum.'], 'singapore-2026'],
-  ['2027', ['澳门 · 拟定', 'Macao · planned'], ['第十二届会议拟在澳门科技大学举行。', 'Macau University of Science and Technology is the proposed venue for the 12th meeting.'], 'macao-2027']
+  ['2004', ['学会创立 · 香港','Society founded · Hong Kong'], ['由 Paul M. Vanhoutte 教授倡议成立，致力于推动亚洲血管生物学与血管医学的发展。','Established at the initiative of Professor Paul M. Vanhoutte to advance vascular biology and medicine in Asia.']],
+  ['2005', ['首届 · 上海','1st · Shanghai'], ['首届学术会议汇聚亚太地区的基础与临床研究者。','The inaugural meeting brought together basic and clinical researchers across the Asia-Pacific.'], sources.firstMeeting],
+  ['2006', ['第二届 · 中国','2nd · China'], ['继上海首届会议后，学会在中国举行第二届学术会议。','After the inaugural meeting in Shanghai, the Society held its second scientific meeting in China.'], sources.huangProfile],
+  ['2008', ['第三届 · 新加坡','3rd · Singapore'], ['第三届会议在新加坡国立大学举行。','The National University of Singapore hosted the third meeting.']],
+  ['2010', ['第四届 · 香港','4th · Hong Kong'], ['第四届学术会议在香港举行。','Hong Kong hosted the fourth scientific meeting.'], sources.huangProfile],
+  ['2012', ['第五届 · 西安','5th · Xi’an'], ['西安会议设青年研究者奖，并举办会员大会。','The Xi’an meeting featured a Young Investigator Award and a General Assembly.'], sources.xian],
+  ['2014', ['第六届 · 吉隆坡','6th · Kuala Lumpur'], ['马来西亚吉隆坡举办第六届会议。','Kuala Lumpur, Malaysia, hosted the sixth meeting.'], sources.kualaLumpur],
+  ['2016', ['第七届 · 花莲','7th · Hualien'], ['第七届会议由花莲慈济医院承办。','Hualien Tzu Chi Hospital hosted the seventh meeting.'], sources.hualien],
+  ['2018', ['第八届 · 上海','8th · Shanghai'], ['与中国病理生理学会血管医学专业委员会第三届学术研讨会联合举行。','The eighth meeting was held jointly with the third symposium of the vascular medicine committee of the Chinese Association of Pathophysiology.'], sources.shanghai],
+  ['2024', ['第九届 · 南京','9th · Nanjing'], ['黄聿教授作 Paul M. Vanhoutte 纪念讲座。','Professor Yu Huang delivered the Paul M. Vanhoutte Memorial Lecture.'], sources.nanjing],
+  ['2025', ['第十届 · 深圳','10th · Shenzhen'], ['与第二届血管稳态与疾病研究前沿论坛联合举行。','The 10th ASVB meeting joined the second Conference on Vascular Homeostasis and Diseases.'], 'shenzhen-2025.html'],
+  ['2026', ['第十一届 · 新加坡','11th · Singapore'], ['重返新加坡国立大学，设 Paul M. Vanhoutte 纪念讲座和青年学者论坛。','The meeting returned to the National University of Singapore and featured the Paul M. Vanhoutte Memorial Lecture and a Young Scholar Forum.'], 'singapore-2026.html'],
+  ['2027', ['第十二届 · 澳门（拟定）','12th · Macao (planned)'], ['会议拟在澳门科技大学举行。','Macau University of Science and Technology is the proposed venue.'], 'macao-2027.html']
 ];

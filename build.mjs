@@ -1,7 +1,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { sources, records, history, membership, secretariat, wechat } from './content.mjs';
+import { sources, records, history, membership, mission, officers, presidents, secretariesGeneral, council, secretariat, wechat } from './content.mjs';
 
 const output = join(dirname(fileURLToPath(import.meta.url)), 'dist');
 const copy = {
@@ -158,19 +158,52 @@ function breadcrumb(v,name,parent) {
   return `<nav class="crumb" aria-label="${v.t('当前位置','Breadcrumb')}"><a href="index.html">${v.c.home}</a>${separator}${parent?`<a href="${parent.href}">${parent.name}</a>${separator}`:''}<span aria-current="page">${name}</span></nav>`;
 }
 function society(v) {
-  const { t } = v;
+  const { t, value, english } = v;
+  const nav = [
+    ['mission', t('学会宗旨','Mission')],
+    ['history', t('学会历史','History')],
+    ['leadership', t('历届主席与秘书长','Presidents and Secretaries-General')],
+    ['council', t('理事会','Council')]
+  ];
+  const leadershipList = (rows) => `<ol class="office-history">${rows.map(([period,name,note,source])=>`<li>
+    <span class="office-years">${value(period)}</span>
+    <strong>${source?`<a href="${sources[source]}">${value(name)}</a>`:value(name)}</strong><p>${value(note)}</p>
+  </li>`).join('')}</ol>`;
+  const names = (list) => `<ul class="council-names" lang="en">${list.map(name=>`<li>${name}</li>`).join('')}</ul>`;
   return `<main id="main">
     <section class="paper-intro"><div class="wrap">${breadcrumb(v,v.c.society)}
       <div class="society-grid"><div>${label(t('学会介绍','The Society'))}<h1>${v.c.name}</h1>
-        <p class="lead">${t('ASVB 推动亚洲血管生物学与血管医学的研究、教育和学术交流，让大学、研究机构和医院的研究者在同一场会议上讨论共同的问题。','ASVB advances research, education and scientific exchange in vascular biology and medicine in Asia. Its meetings bring researchers from universities, institutes and hospitals into the same conversation.')}</p>
+        <p class="lead">${t('亚洲血管生物学学会（ASVB）于 2004 年在香港成立，是由 Paul M. Vanhoutte 教授倡议创立的非营利学术组织。','The Asian Society for Vascular Biology (ASVB) is a non-profit scientific society founded in Hong Kong in 2004 at the initiative of Professor Paul M. Vanhoutte.')}</p>
         <p class="body-copy">${v.value(membership)}</p></div>${plate(v)}</div></div>
     </section>
-    <section class="wrap editorial-section"><div class="split-intro">${label(t('学术交流','Scientific exchange'))}<div><h2>${t('学会的工作','The work of the Society')}</h2>
-      <p>${t('在学术会议上，基础科学家讨论血管内皮、平滑肌与周围组织如何调控血管功能，临床研究者带来疾病机制和治疗中的问题。纪念讲座、专题报告和壁报让这些问题在不同学科之间展开。','Scientific sessions connect work on the endothelium, vascular muscle and surrounding tissues with clinical questions about mechanisms and treatment. Named lectures, focused talks and posters give members several ways to discuss their findings.')}</p>
-      <p>${t('学会也支持血管生物学教学和继续教育。青年学者论坛为研究生和青年研究人员提供口头展示与同行讨论的机会。','The Society supports the teaching of vascular biology and continuing education for scientists and physicians. The Young Scholar Forum gives postgraduate students and early-career investigators a place to present and discuss their research.')}</p></div></div></section>
-    <section class="history-section"><div class="wrap split-intro"><div>${label(t('自 2005 年','Since 2005'))}<h2>${t('会议沿革','Meeting history')}</h2></div>
-      <ol class="timeline">${history.map(([year,place,summary,id])=>`<li><em>${year}</em><div><h3>${id?`<a href="${route(id)}">${v.value(place)}</a>`:v.value(place)}</h3><p>${v.value(summary)}</p></div></li>`).join('')}</ol>
+    <nav class="society-nav" aria-label="${t('学会介绍目录','On this page')}"><div class="wrap">${nav.map(([id,title])=>`<a href="#${id}">${title}</a>`).join('')}</div></nav>
+    <section id="mission" class="wrap editorial-section"><div class="split-intro"><div><h2>${t('学会宗旨','Our mission')}</h2><p>${cite('sources.html#society-sources',t('章程与资料','Bylaws and sources'))}</p></div>
+      <div class="mission-grid">${mission.map(([zh,en,bodyZh,bodyEn])=>`<div><h3>${t(zh,en)}</h3><p>${t(bodyZh,bodyEn)}</p></div>`).join('')}</div>
     </div></section>
+    <section id="history" class="history-section"><div class="wrap split-intro"><div><h2>${t('学会历史','Our history')}</h2><p>${t('从 2004 年创会到历届学术会议。','From the Society’s founding in 2004 to its scientific meetings across Asia.')}</p></div>
+      <ol class="timeline">${history.map(([year,place,summary,href])=>`<li><em>${year}</em><div><h3>${href?`<a href="${href}">${value(place)}</a>`:value(place)}</h3><p>${value(summary)}</p></div></li>`).join('')}</ol>
+    </div></section>
+    <section id="leadership" class="wrap editorial-section society-roster">
+      <h2>${t('历届主席与秘书长','Presidents and Secretaries-General')}</h2>
+      <div class="leadership-grid">
+        <div><h3>${t('主席','Presidents')}</h3>${leadershipList(presidents)}</div>
+        <div><h3>${t('秘书长','Secretaries-General')}</h3>${leadershipList(secretariesGeneral)}</div>
+      </div>
+    </section>
+    <section id="council" class="society-council"><div class="wrap editorial-section society-roster">
+      <h2>${t('理事会','Council')} <small>2025–2027</small></h2>
+      <p class="council-date">${t('名单依据 2026 年 6 月 12 日新加坡会员大会记录，会议纪要待下届会员大会确认。','The roster reflects the records of the 12 June 2026 General Assembly in Singapore. The minutes are subject to confirmation at the next General Assembly.')}</p>
+      <h3>${t('学会领导','Officers')}</h3>
+      <dl class="society-officers">${officers.map(([role,name,affiliation])=>`<div><dt>${value(role)}</dt><dd><strong>${value(name)}</strong>${english||name[0]===name[1]?'':`<span lang="en">${name[1]}</span>`}<small>${value(affiliation)}</small></dd></div>`).join('')}</dl>
+      <div class="leadership-grid council-lists">
+        <div><h3>${t('理事','Council members')}</h3>${names(council.members)}</div>
+        <div><h3>${t('增选理事','Co-opted members')}</h3>${names(council.coOpted)}</div>
+      </div>
+      <div class="council-archive"><h3>${t('往届理事会记录','Past council records')}</h3>
+        ${council.archives.map(archive=>`<details class="disclosure"><summary>${value(archive.title)}</summary><div class="leadership-grid council-lists"><div><h4>${t('理事','Council members')}</h4>${names(archive.members)}</div><div><h4>${t('增选理事','Co-opted members')}</h4>${names(archive.coOpted)}</div></div></details>`).join('')}
+        <p class="council-date">${t('本页收录已有档案可核实的名单，早期理事名录有待补充。','The records presented here are the rosters that could be verified. Earlier council lists remain to be documented.')} ${cite('sources.html#society-sources',t('查阅资料出处','See the sources'))}</p>
+      </div></div>
+    </section>
   </main>`;
 }
 function download(v, file, name, format='DOCX') {
@@ -312,6 +345,9 @@ function credits(v) {
     <div class="credits-grid"><section><h2>${t('会议信息','Meeting sources')}</h2>
       <p>${t('澳门会议内容依据《第十二届亚洲血管生物学学会会议第一轮通知》中英文修订稿。会期、场地及费用按第一轮通知的拟定状态列示。学会宗旨依据 2026 年修订的 ASVB 章程。','The Macao pages follow the bilingual first announcement for the 12th Scientific Meeting. Dates, venue and fees are presented as proposed. The description of the Society follows its by-laws revised in 2026.')}</p>
       <ul class="source-list"><li>${cite(sources.firstMeeting,t('首届会议通知 · Acta Pharmacologica Sinica','Inaugural meeting announcement · Acta Pharmacologica Sinica'))}</li><li>${cite(sources.shanghai,t('第八届会议通知 · 上海交通大学医学院','Eighth meeting notice · Shanghai Jiao Tong University School of Medicine'))}</li><li>${cite(sources.shenzhen,t('第十届会后报道 · 广东省药理学会','10th meeting report · Guangdong Pharmacological Society'))}</li><li>${cite(sources.interview,t('深圳会议讲者访谈 · Vessel Plus','Shenzhen speaker interview · Vessel Plus'))}</li><li>${cite(sources.singapore,t('第十一届会后报道 · 南方科技大学','11th meeting report · Southern University of Science and Technology'))}</li></ul>
+      <h3 id="society-sources">${t('学会宗旨、历史与理事会','Mission, history and council')}</h3>
+      <p>${t('学会宗旨依据 ASVB 章程第 II 条。创会地点及年份见第九届会议通知。领导与理事名单主要依据 2018 年上海、2025 年深圳及 2026 年新加坡会员大会记录，治理结构依据 2026 年 6 月 12 日通过的理事会章程。','The mission follows Article II of the ASVB bylaws. The ninth meeting announcement records the founding year and place. Leadership and council rosters draw on General Assembly records from Shanghai (2018), Shenzhen (2025) and Singapore (2026). The 12 June 2026 Council Bylaws describe the governance structure.')}</p>
+      <p>${cite(sources.huangProfile,t('黄聿教授履历','Yu Huang academic profile'))} · ${cite(sources.wangProfile,t('汪南平教授履历','Nanping Wang academic profile'))} · ${cite(sources.nanjing,t('南京会议报道及创会主席资料','Nanjing meeting report and founding President'))}</p>
       <h3 id="meeting-themes">${t('历届会议主题出处','Sources for meeting themes')}</h3>
       <p>${t('深圳第十届 ASVB 学术会议的英文主题见卞劲松主席 2026 年 6 月 12 日工作报告第 2 节。本站附中文译文。同期联合论坛的中文主题见南方科技大学医学院发布的第三轮通知。','The English theme for the 10th ASVB meeting in Shenzhen appears in section 2 of President Jinsong Bian’s report of 12 June 2026. This site provides a Chinese translation. The SUSTech School of Medicine’s third announcement gives the Chinese theme of the joint forum.')} ${cite(sources.shenzhenNotice,t('深圳联合会议第三轮通知','Shenzhen joint meeting announcement'))}</p>
       <p>${t('新加坡第十一届会议的英文主题见印刷版会议手册第 2 页主席欢迎辞，中文采用南方科技大学会后报道的原文。','The President’s welcome on page 2 of the printed Singapore programme gives the English theme. The Chinese wording follows the meeting report published by Southern University of Science and Technology.')} ${cite(sources.singapore,t('新加坡会后报道','Singapore meeting report'))}</p></section>
@@ -338,7 +374,7 @@ function pageMetadata(v, title) {
     index: t('亚洲血管生物学学会、澳门 2027 学术会议通知，以及深圳和新加坡会议回顾。','The Asian Society for Vascular Biology, the Macao 2027 meeting announcement, and reports from Shenzhen and Singapore.'),
     'macao-2027': t('第十二届 ASVB 学术会议拟于 2027 年 8 月 23–24 日在澳门科技大学举行。查看第一轮通知、拟定日程、参会回执及摘要模板。','The 12th ASVB meeting is planned for 23–24 August 2027 at Macau University of Science and Technology. Find the first announcement, programme, attendance form and abstract template.'),
     sponsorship: t('联系 ASVB 大会秘书处，洽谈澳门 2027 第十二届学术会议的会议赞助和展位合作。','Contact the ASVB meeting secretariat about sponsorship and exhibiting at the 12th Scientific Meeting in Macao in 2027.'),
-    society: t('亚洲血管生物学学会的宗旨、学术交流与自 2005 年起的会议沿革。','The aims of the Asian Society for Vascular Biology and its scientific meetings since 2005.'),
+    society: t('亚洲血管生物学学会的宗旨、创会与会议历史、历届主席与秘书长，以及本届和往届理事会名单。','The mission and history of the Asian Society for Vascular Biology, its presidents and secretaries-general, and current and past council rosters.'),
     sources: t('ASVB 学术会议的文献出处、原始通知、摄影与图版署名。','Original announcements, sources for ASVB meeting themes, and photography and illustration credits.')
   }[page];
   const path = isMacao ? meetingGraphic(v) : (record ? `assets/${record.image}` : 'assets/society-logo.png');
