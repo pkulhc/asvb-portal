@@ -23,6 +23,9 @@ python -m http.server 8000 --bind 127.0.0.1 --directory dist
 - `content.mjs` 保存两届会议回顾、学会沿革及公开资料链接。
 - `build.mjs` 生成两种语言的 HTML 和第十二届会议的日历文件。修改后在仓库根目录运行 `node build.mjs`，将更新后的 `dist` 一并提交。
 - `dist/site.css` 和 `dist/site.js` 分别管理排版和导航。`dist/assets` 保存本地图片、字体及许可证，`dist/downloads` 保存可下载的参会材料。
+- `content.mjs` 中会议记录的 `gallery` 字段生成回顾页的“会议现场”图集；图片放在 `dist/assets`，建议先压缩为约 1280 px 宽的 WebP。
+- 中文标题字体 `dist/assets/cn-display.woff2` 是 Noto Serif SC 的子集。新增标题用字后运行 `python3 scripts/update_display_font.py path/to/NotoSerifSC.ttf`（需要 fonttools 和完整的 Noto Serif SC 字体文件，下载地址见脚本说明），补入缺字后再检查页面。
+- 赞助档位、价格、展位规格和权益确定之前，赞助招商页只提供秘书处洽谈入口；确定后再写入 `build.mjs` 的 sponsorship 部分。
 - 第十二届采用第一轮通知的拟定日程和收费口径。更新会期时，同时检查页面、日历和下载附件。第十一届回顾中的统计采用会后报道，下载的 PDF 保留会前日程。
 
 GitHub Pages 从 `gh-pages` 分支根目录发布网站。在 `main` 提交并推送更新后，运行 `git subtree push --prefix dist origin gh-pages` 即可发布新版。

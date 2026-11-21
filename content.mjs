@@ -39,6 +39,11 @@ export const records = [
       [['亚太学术交流', 'Exchange across Asia'], ['日本血管生物学与医学组织和韩国血管生物学与医学学会的学者参与大会报告。约 200 名参会者在两个会场交流。', 'Speakers included representatives of the Japanese and Korean vascular biology and medicine societies. Around 200 participants gathered across two meeting venues.']]
     ],
     numbers: [['31', ['主会场特邀报告', 'Invited main-session talks']], ['9', ['青年口头报告', 'Young investigator talks']], ['45', ['现场展示壁报', 'Posters presented']]],
+    gallery: [
+      ['singapore-session.webp', 1280, 720, ['主会场学术报告', 'Main-session lecture'], ['讲者在 MD11 报告厅介绍血管炎症消退相关研究', 'A speaker presents research on the resolution of vascular inflammation in the MD11 Auditorium']],
+      ['singapore-young-forum.webp', 1280, 883, ['青年学者论坛', 'Young Scholar Forum'], ['青年研究者在分会场作口头报告', 'An early-career researcher gives an oral presentation in the Young Scholar Forum']],
+      ['singapore-meeting-desk.webp', 1280, 873, ['会场指引与资料台', 'Meeting desk and signage'], ['MD11 报告厅外的会议指引易拉宝与资料台', 'Meeting signage and information desk outside the MD11 Auditorium']]
+    ],
     source: 'singapore',
     sourceTitle: ['南方科技大学会后报道', 'Southern University of Science and Technology report']
   },
