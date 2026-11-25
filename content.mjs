@@ -1,20 +1,14 @@
 export const sources = {
   firstMeeting: 'https://www.chinaphar.com/announcement/view/104',
-  huangProfile: 'https://www.cuhk.edu.hk/proj/HuangLab/profile.html',
-  wangProfile: 'https://medgs.xjtu.edu.cn/info/1253/6328.htm',
+  huangProfile: 'https://scholars.cityu.edu.hk/en/persons/yhuan24/',
+  wangProfile: 'https://hsc.ecnu.edu.cn/ab/c3/c37112a437187/page.htm',
+  bianProfile: 'https://med.sustech.edu.cn/en/teachersMoreE?AID=53&name=Jinsong+BIAN',
   hualien: 'https://www.conf.tw/site/page.aspx?lang=en&pid=901&sid=1096',
-  xian: 'https://pubmed.ncbi.nlm.nih.gov/23676334/',
-  kualaLumpur: 'https://hub.hku.hk/handle/10722/226384',
-  nanjing: 'https://www.cityu.edu.hk/bms/broadcast/news/20241226-yh-lecture.htm',
   shanghai: 'https://www.shsmu.edu.cn/news/info/1011/15228.htm',
-  shenzhen: 'https://www.gdsta.cn/xhzc/ykxh/gdsylxh/xhdt110/content_47634',
-  shenzhenNotice: 'https://mp.weixin.qq.com/s/y9G50P5hjH9jaP32kPW_BA',
   interview: 'https://www.oaepublish.com/interviews/vp.348',
   singapore: 'https://newshub.sustech.edu.cn/html/202606/47678.html',
   city: 'https://commons.wikimedia.org/wiki/File:Lago_Nam_Van,_Macao,_2013-08-08,_DD_04.jpg',
-  artist: 'https://delso.photo/',
   cityLicense: 'https://creativecommons.org/licenses/by-sa/3.0/',
-  plate: 'https://archive.org/details/anatomyofhumanbo1918gray/page/546/mode/1up',
   plateLicense: 'https://commons.wikimedia.org/wiki/File:Gray505.png#Licensing'
 };
 
@@ -128,10 +122,10 @@ export const officers = [
 ];
 
 export const presidents = [
-  [['创会时期','Founding years'], leaders.vanhoutte, ['创会主席，2005 年首届学术会议时在任。','Founding President, in office at the first scientific meeting in 2005.'], 'nanjing'],
+  [['创会时期','Founding years'], leaders.vanhoutte, ['创会主席，2005 年首届学术会议时在任。','Founding President, in office at the first scientific meeting in 2005.']],
   [['2010–2018','2010–2018'], leaders.huang, ['曾任创会秘书长，2010 年接任主席。','Previously the founding Secretary-General, he became President in 2010.'], 'huangProfile'],
-  [['2018–2025','2018–2025'], leaders.wang, ['2018 年上海会员大会当选，2025 年深圳换届前仍任主席。','Elected in Shanghai in 2018 and chaired the 2025 General Assembly in Shenzhen before the leadership transition.'], 'nanjing'],
-  [['2025–2027','2025–2027'], leaders.bian, ['2025 年深圳会员大会确认本届任职。','The 2025 General Assembly in Shenzhen endorsed his appointment for the current term.'], 'singapore']
+  [['2018–2025','2018–2025'], leaders.wang, ['2018 年上海会员大会当选，2025 年深圳换届前仍任主席。','Elected in Shanghai in 2018 and chaired the 2025 General Assembly in Shenzhen before the leadership transition.'], 'wangProfile'],
+  [['2025–2027','2025–2027'], leaders.bian, ['2025 年深圳会员大会确认本届任职。','The 2025 General Assembly in Shenzhen endorsed his appointment for the current term.'], 'bianProfile']
 ];
 
 export const secretariesGeneral = [
@@ -208,7 +202,7 @@ export const records = [
       ['singapore-meeting-desk.webp', 1280, 873, ['会场指引与资料台', 'Meeting desk and signage'], ['MD11 报告厅外的会议指引易拉宝与资料台', 'Meeting signage and information desk outside the MD11 Auditorium']]
     ],
     source: 'singapore',
-    sourceTitle: ['南方科技大学会后报道', 'Southern University of Science and Technology report']
+    sourceTitle: ['第十一届 ASVB 会后报道 · 南方科技大学新闻网', '11th ASVB meeting report (Chinese) · SUSTech News']
   },
   {
     id: 'shenzhen-2025',
@@ -238,22 +232,22 @@ export const records = [
       [['青年研究者交流', 'Early-career presentations'], ['联合会议设青年专题报告和青年口头报告，研究者在主会场、青年会场及 ASVB 专场之间交流。', 'The joint programme included a dedicated early-career track with thematic and oral presentations, alongside the plenary and ASVB sessions.']]
     ],
     numbers: [['3', ['联合会议会场', 'Venues at the joint meeting']], ['11', ['ASVB 专场报告', 'ASVB session talks']], ['≈200', ['联合会议参会者', 'Joint-meeting participants']]],
-    source: 'shenzhen',
-    sourceTitle: ['广东省药理学会会后报道', 'Guangdong Pharmacological Society report']
+    source: 'interview',
+    sourceTitle: ['深圳会议讲者 Maik Gollasch 访谈 · Vessel Plus', 'Interview with Shenzhen meeting speaker Maik Gollasch · Vessel Plus']
   }
 ];
 
 export const history = [
   ['2004', ['学会创立 · 香港','Society founded · Hong Kong'], ['由 Paul M. Vanhoutte 教授倡议成立，致力于推动亚洲血管生物学与血管医学的发展。','Established at the initiative of Professor Paul M. Vanhoutte to advance vascular biology and medicine in Asia.']],
   ['2005', ['首届 · 上海','1st · Shanghai'], ['首届学术会议汇聚亚太地区的基础与临床研究者。','The inaugural meeting brought together basic and clinical researchers across the Asia-Pacific.'], sources.firstMeeting],
-  ['2006', ['第二届 · 中国','2nd · China'], ['继上海首届会议后，学会在中国举行第二届学术会议。','After the inaugural meeting in Shanghai, the Society held its second scientific meeting in China.'], sources.huangProfile],
+  ['2006', ['第二届 · 中国','2nd · China'], ['继上海首届会议后，学会在中国举行第二届学术会议。','After the inaugural meeting in Shanghai, the Society held its second scientific meeting in China.']],
   ['2008', ['第三届 · 新加坡','3rd · Singapore'], ['第三届会议在新加坡国立大学举行。','The National University of Singapore hosted the third meeting.']],
-  ['2010', ['第四届 · 香港','4th · Hong Kong'], ['第四届学术会议在香港举行。','Hong Kong hosted the fourth scientific meeting.'], sources.huangProfile],
-  ['2012', ['第五届 · 西安','5th · Xi’an'], ['约 200 名多国学者参会，设青年研究者奖竞赛并召开会员大会；会后述评刊于《Journal of Cardiovascular Pharmacology》。','Hosted around 200 participants across nine countries and regions, featuring the Young Investigator Award competition, a General Assembly and an editorial in the Journal of Cardiovascular Pharmacology.'], sources.xian],
-  ['2014', ['第六届 · 吉隆坡','6th · Kuala Lumpur'], ['马来西亚吉隆坡举办第六届会议，大会摘要及述评刊于《Journal of Cardiovascular Pharmacology》。','Kuala Lumpur, Malaysia, hosted the sixth meeting, with meeting abstracts and an editorial published in the Journal of Cardiovascular Pharmacology.'], sources.kualaLumpur],
+  ['2010', ['第四届 · 香港','4th · Hong Kong'], ['第四届学术会议在香港举行。','Hong Kong hosted the fourth scientific meeting.']],
+  ['2012', ['第五届 · 西安','5th · Xi’an'], ['约 200 名多国学者参会，设青年研究者奖竞赛并召开会员大会；会后述评刊于《Journal of Cardiovascular Pharmacology》。','Hosted around 200 participants across nine countries and regions, featuring the Young Investigator Award competition, a General Assembly and an editorial in the Journal of Cardiovascular Pharmacology.']],
+  ['2014', ['第六届 · 吉隆坡','6th · Kuala Lumpur'], ['马来西亚吉隆坡举办第六届会议，大会摘要及述评刊于《Journal of Cardiovascular Pharmacology》。','Kuala Lumpur, Malaysia, hosted the sixth meeting, with meeting abstracts and an editorial published in the Journal of Cardiovascular Pharmacology.']],
   ['2016', ['第七届 · 花莲','7th · Hualien'], ['由花莲慈济医院 Tony J. F. Lee 教授承办，汇聚 14 个国家和地区的 223 名学者，展示壁报 35 份。','Organized by Professor Tony J. F. Lee at Hualien Tzu Chi Hospital, welcoming 223 participants from 14 countries and regions with 35 poster presentations.'], sources.hualien],
   ['2018', ['第八届 · 上海','8th · Shanghai'], ['与中国病理生理学会血管医学专业委员会第三届学术研讨会联合举行，会员大会决议设立 Tony J. F. Lee 纪念讲座。','Held jointly with the third symposium of the vascular medicine committee of the Chinese Association of Pathophysiology; the General Assembly established the Tony J. F. Lee Memorial Lecture.'], sources.shanghai],
-  ['2024', ['第九届 · 南京','9th · Nanjing'], ['约 200 名学者参会；黄聿教授作 Paul M. Vanhoutte 纪念讲座，Alex F. Chen 教授作 Tony J. F. Lee 纪念讲座。','Welcomed around 200 participants; Yu Huang delivered the Paul M. Vanhoutte Memorial Lecture and Alex F. Chen delivered the Tony J. F. Lee Memorial Lecture.'], sources.nanjing],
+  ['2024', ['第九届 · 南京','9th · Nanjing'], ['约 200 名学者参会；黄聿教授作 Paul M. Vanhoutte 纪念讲座，Alex F. Chen 教授作 Tony J. F. Lee 纪念讲座。','Welcomed around 200 participants; Yu Huang delivered the Paul M. Vanhoutte Memorial Lecture and Alex F. Chen delivered the Tony J. F. Lee Memorial Lecture.']],
   ['2025', ['第十届 · 深圳','10th · Shenzhen'], ['与第二届血管稳态与疾病研究前沿论坛联合举行，并召开会员大会确认本届学会领导与理事会换届。','Joined the second Conference on Vascular Homeostasis and Diseases, with the General Assembly endorsing the 2025–2027 Society leadership and council transition.'], 'shenzhen-2025.html'],
   ['2026', ['第十一届 · 新加坡','11th · Singapore'], ['重返新加坡国立大学，设 Paul M. Vanhoutte 纪念讲座和青年学者论坛，通过修订版《理事会章程》。','Returned to the National University of Singapore with the Paul M. Vanhoutte Memorial Lecture, Young Scholar Forum and adoption of the amended Council Bylaws.'], 'singapore-2026.html'],
   ['2027', ['第十二届 · 澳门（拟定）','12th · Macao (planned)'], ['拟于 2027 年 8 月 23–24 日在澳门科技大学举行，面向亚太与粤港澳大湾区学术界开放参会意向登记。','Planned for 23–24 August 2027 at Macau University of Science and Technology, connecting the Greater Bay Area and wider Asia-Pacific vascular biology community.'], 'macao-2027.html']

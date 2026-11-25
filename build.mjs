@@ -32,7 +32,7 @@ const icons = {
 };
 const icon = (key) => `<svg class="icon" aria-hidden="true" focusable="false" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round">${icons[key]}</svg>`;
 const label = (text) => `<p class="eyebrow"><span></span>${text}</p>`;
-const cite = (href, name) => `<a class="text-link" href="${href}">${name}</a>`;
+const cite = (href, name) => `<a class="text-link" href="${escapeAttribute(href)}">${name}</a>`;
 const titleTheme = ['血管健康与疾病发生：机制与转化前沿探索', 'Vascular Health and Disease Pathogenesis: Exploring Mechanistic and Translational Frontiers'];
 const route = (id) => `${id}.html`;
 const publicBase = 'https://pkulhc.github.io/asvb-portal/';
@@ -117,7 +117,7 @@ function footer(v) {
 }
 
 function cityCredit(v) {
-  return `<div class="city-credit"><span>${icon('pin')}${v.t('中国澳门 · 南湾湖','Nam Van Lake · Macao, China')}</span><small><a href="${sources.artist}">Diego Delso · delso.photo</a><i>/</i><a href="${sources.cityLicense}">CC BY-SA 3.0</a></small></div>`;
+  return `<div class="city-credit"><span>${icon('pin')}${v.t('中国澳门 · 南湾湖','Nam Van Lake · Macao, China')}</span><small>Diego Delso<i>/</i><a href="${sources.cityLicense}">CC BY-SA 3.0</a></small></div>`;
 }
 
 function lightboxAttrs(v, src, alt, caption) {
@@ -184,7 +184,7 @@ function home(v) {
     const target = year === '2025' ? href('shenzhen-2025.html')
       : year === '2026' ? href('singapore-2026.html')
       : year === '2027' ? href('macao-2027.html')
-      : href('society.html#history');
+      : href(`society.html#history-${year}`);
     const isFeatured = year === '2025' || year === '2026' || year === '2027';
     return `<a href="${target}" class="chronicle-item${isFeatured?' is-featured':''}${year==='2027'?' is-upcoming':''}"><em>${year}</em><span>${shortLabel}</span></a>`;
   }).join('');
@@ -285,7 +285,7 @@ function society(v) {
   ];
   const leadershipList = (rows) => `<ol class="office-history">${rows.map(([period,name,note,source])=>`<li>
     <span class="office-years">${value(period)}</span>
-    <strong>${source?`<a href="${sources[source]}">${value(name)} <span class="ext-mark" aria-hidden="true">${icon('external')}</span></a>`:value(name)}</strong><p>${value(note)}</p>
+    <strong>${source?`<a href="${escapeAttribute(sources[source])}">${value(name)} <span class="ext-mark" aria-hidden="true">${icon('external')}</span></a>`:value(name)}</strong><p>${value(note)}</p>
   </li>`).join('')}</ol>`;
   const names = (list) => `<ul class="council-names" lang="en">${list.map(name=>`<li>${name}</li>`).join('')}</ul>`;
 
@@ -333,7 +333,7 @@ function society(v) {
     <section id="history" class="history-section"><div class="wrap split-intro"><div><h2>${t('学会历史','Our history')}</h2><p>${t('从 2004 年香港创会到历届亚太学术会议。','From the Society’s founding in 2004 to its scientific meetings across Asia.')}</p></div>
       <ol class="timeline">${history.map(([year,place,summary,target])=>{
         const isExt = target && target.startsWith('http');
-        return `<li><em>${year}</em><div><h3>${target?`<a href="${target}">${value(place)}${isExt?` <span class="ext-mark" aria-hidden="true">${icon('external')}</span>`:''}</a>`:value(place)}</h3><p>${value(summary)}</p></div></li>`;
+        return `<li id="history-${year}"><em>${year}</em><div><h3>${target?`<a href="${escapeAttribute(target)}">${value(place)}${isExt?` <span class="ext-mark" aria-hidden="true">${icon('external')}</span>`:''}</a>`:value(place)}</h3><p>${value(summary)}</p></div></li>`;
       }).join('')}</ol>
     </div></section>
 
@@ -560,9 +560,9 @@ function recordPage(v, r) {
         ${r.facts?`<dl class="record-facts">${r.facts.map(([k,val])=>`<div><dt>${value(k)}</dt><dd>${value(val)}</dd></div>`).join('')}</dl>`:''}
       </div>
       <div class="report-copy"><p class="lead">${value(r.intro)}</p><p>${value(r.host)}</p>
-        ${r.forumTheme?`<p class="forum-theme">${t(`同期联合论坛以“${r.forumTheme}”为主题。`,`The joint forum announced its own theme, <span lang="zh-CN">“${r.forumTheme}”</span> (exploring disease mechanisms and protecting vascular health).`)} ${cite(sources.shenzhenNotice,t('联合会议第三轮通知','Joint meeting announcement'))}</p>`:''}
+        ${r.forumTheme?`<p class="forum-theme">${t(`同期联合论坛以“${r.forumTheme}”为主题。`,`The joint forum announced its own theme, <span lang="zh-CN">“${r.forumTheme}”</span> (exploring disease mechanisms and protecting vascular health).`)}</p>`:''}
         ${r.sections.map(([heading,body])=>`<h3>${value(heading)}</h3><p>${value(body)}</p>`).join('')}
-        <div class="source-links">${cite(sources[r.source],value(r.sourceTitle))}${r.id==='shenzhen-2025'?cite(sources.interview,t('讲者访谈 · Vessel Plus','Speaker interview · Vessel Plus')):''}${cite('sources.html#meeting-themes',t('会议主题出处','Sources for meeting themes'))}</div>
+        <div class="source-links">${cite(sources[r.source],value(r.sourceTitle))}${cite('sources.html#meeting-themes',t('会议主题出处','Sources for meeting themes'))}</div>
         ${r.id==='singapore-2026'?download(v,'ASVB2026-programme.pdf',t('下载会前日程','Download the pre-meeting programme'),'PDF'):''}
       </div></div></section>
     ${r.gallery?`<section class="gallery-section" aria-labelledby="gallery-title"><div class="wrap"><h2 id="gallery-title">${t('会议现场','At the meeting')}</h2><div class="gallery">${r.gallery.map(([file,w,h,cap,alt])=>{
@@ -578,16 +578,20 @@ function credits(v) {
   return `<main id="main" class="credits-page"><div class="wrap">${breadcrumb(v,v.c.resources)}${label(t('出处与署名','Sources & credits'))}<h1>${v.c.resources}</h1>
     <div class="credits-grid"><section><h2>${t('会议信息','Meeting sources')}</h2>
       <p>${t('澳门会议内容依据《第十二届亚洲血管生物学学会会议第一轮通知》中英文修订稿。会期、场地及费用按第一轮通知的拟定状态列示。学会宗旨依据 2026 年修订的 ASVB 章程。','The Macao pages follow the bilingual first announcement for the 12th Scientific Meeting. Dates, venue and fees are presented as proposed. The description of the Society follows its bylaws revised in 2026.')}</p>
-      <ul class="source-list"><li>${cite(sources.firstMeeting,t('首届会议通知 · Acta Pharmacologica Sinica','Inaugural meeting announcement · Acta Pharmacologica Sinica'))}</li><li>${cite(sources.shanghai,t('第八届会议通知 · 上海交通大学医学院','Eighth meeting notice · Shanghai Jiao Tong University School of Medicine'))}</li><li>${cite(sources.shenzhen,t('第十届会后报道 · 广东省药理学会','10th meeting report · Guangdong Pharmacological Society'))}</li><li>${cite(sources.interview,t('深圳会议讲者访谈 · Vessel Plus','Shenzhen speaker interview · Vessel Plus'))}</li><li>${cite(sources.singapore,t('第十一届会后报道 · 南方科技大学','11th meeting report · Southern University of Science and Technology'))}</li></ul>
+      <ul class="source-list"><li>${cite(sources.firstMeeting,t('首届会议通知 · Acta Pharmacologica Sinica','Inaugural meeting announcement · Acta Pharmacologica Sinica'))}</li><li>${cite(sources.shanghai,t('第八届会议通知 · 上海交通大学医学院','Eighth meeting notice · Shanghai Jiao Tong University School of Medicine'))}</li><li>${t('第十届会后报道 · 广东省药理学会','10th meeting report · Guangdong Pharmacological Society')}</li><li>${cite(sources.interview,t('深圳会议讲者 Maik Gollasch 访谈 · Vessel Plus','Interview with Shenzhen meeting speaker Maik Gollasch · Vessel Plus'))}</li></ul>
       <h3 id="society-sources">${t('学会宗旨、历史与理事会','Mission, history and council')}</h3>
       <p>${t('学会宗旨依据 ASVB 章程第 II 条。创会地点及年份见第九届会议通知。历届会议概况、会员类别统计（截至 2026 年 6 月 11 日）、顾问委员会及理事名单依据 2018 年上海、2025 年深圳及 2026 年新加坡会员大会纪要；理事会规模、任期与专门委员会设置依据 2026 年 6 月 12 日通过的《理事会章程》；会员申请表采用学会现行中英文《会员登记表》。','The mission follows Article II of the ASVB bylaws. The ninth meeting announcement records the founding year and place. Meeting history notes, membership figures as of 11 June 2026, and the Advisory Committee and Council rosters draw on General Assembly records from Shanghai (2018), Shenzhen (2025) and Singapore (2026). Council size, terms and standing committees follow the Council Bylaws adopted on 12 June 2026, alongside the bilingual Membership Application Form.')}</p>
-      <p>${cite(sources.huangProfile,t('黄聿教授履历','Yu Huang academic profile'))} · ${cite(sources.wangProfile,t('汪南平教授履历','Nanping Wang academic profile'))} · ${cite(sources.nanjing,t('南京会议报道及创会主席资料','Nanjing meeting report and founding President'))}</p>
+      <ul class="source-list">
+        <li>${cite(sources.huangProfile,t('黄聿教授 · 香港城市大学学者主页','Yu Huang · CityUHK Scholars profile'))}</li>
+        <li>${cite(sources.wangProfile,t('汪南平教授 · 华东师范大学教师主页','Nanping Wang · East China Normal University faculty profile'))}</li>
+        <li>${cite(sources.bianProfile,t('卞劲松教授 · 南方科技大学医学院教师主页','Jinsong Bian · SUSTech School of Medicine faculty profile'))}</li>
+      </ul>
       <h3 id="meeting-themes">${t('历届会议主题出处','Sources for meeting themes')}</h3>
-      <p>${t('深圳第十届 ASVB 学术会议的英文主题见卞劲松主席 2026 年 6 月 12 日工作报告第 2 节。本站附中文译文。同期联合论坛的中文主题见南方科技大学医学院发布的第三轮通知。','The English theme for the 10th ASVB meeting in Shenzhen appears in section 2 of President Jinsong Bian’s report of 12 June 2026. This site provides a Chinese translation. The SUSTech School of Medicine’s third announcement gives the Chinese theme of the joint forum.')} ${cite(sources.shenzhenNotice,t('深圳联合会议第三轮通知','Shenzhen joint meeting announcement'))}</p>
-      <p>${t('新加坡第十一届会议的英文主题见印刷版会议手册第 2 页主席欢迎辞，中文采用南方科技大学会后报道的原文。','The President’s welcome on page 2 of the printed Singapore programme gives the English theme. The Chinese wording follows the meeting report published by Southern University of Science and Technology.')} ${cite(sources.singapore,t('新加坡会后报道','Singapore meeting report'))}</p></section>
+      <p>${t('深圳第十届 ASVB 学术会议的英文主题见卞劲松主席 2026 年 6 月 12 日工作报告第 2 节。本站附中文译文。同期联合论坛的中文主题见南方科技大学医学院发布的第三轮通知。','The English theme for the 10th ASVB meeting in Shenzhen appears in section 2 of President Jinsong Bian’s report of 12 June 2026. This site provides a Chinese translation. The SUSTech School of Medicine’s third announcement gives the Chinese theme of the joint forum.')}</p>
+      <p>${t('新加坡第十一届会议的英文主题见印刷版会议手册第 2 页主席欢迎辞，中文采用南方科技大学会后报道的原文。','The President’s welcome on page 2 of the printed Singapore programme gives the English theme. The Chinese wording follows the SUSTech meeting report.')} ${cite(sources.singapore,t('第十一届 ASVB 会后报道 · 南方科技大学新闻网','11th ASVB meeting report (Chinese) · SUSTech News'))}</p></section>
       <section><h2>${t('影像与图版','Photography and illustration')}</h2><h3 id="home-panorama">${t('首页澳门夜景','Macao homepage panorama')}</h3><p>${t('首页横幅为 AI 生成的澳门滨水夜景示意图，参考 Diego Delso 的南湾湖夜景照片，融入澳门塔与新葡京。','The homepage banner is an AI-generated interpretation of Macao’s waterfront, featuring Macao Tower and Grand Lisboa and inspired by Diego Delso’s photograph of Nam Van Lake.')} <a href="${sources.city}">${t('参考照片','Reference photograph')}</a></p>
-      <h3>${t('澳门南湾湖','Nam Van Lake, Macao')}</h3><p>${t('Diego Delso 摄于 2013 年。澳门会议页与宣传图采用裁切、缩放后的照片，改编图像沿用 CC BY-SA 3.0 许可。','Photograph by Diego Delso, 2013. The Macao meeting page and meeting graphics feature cropped and resized versions of the photograph. The adaptations are available under CC BY-SA 3.0.')} <a href="${sources.city}">${t('原作','Original')}</a> · <a href="${sources.artist}">delso.photo</a> · <a href="${sources.cityLicense}">${t('许可','Licence')}</a></p>
-      <h3>${t('主动脉弓及其分支','The aortic arch and its branches')}</h3><p>H. V. Carter, <i>Gray’s Anatomy</i>, 1918, fig. 505. ${t('公有领域。','Public domain.')} <a href="${sources.plate}">${t('原书图版','Original plate')}</a> · <a href="${sources.plateLicense}">${t('公版说明','Rights information')}</a></p>
+      <h3>${t('澳门南湾湖','Nam Van Lake, Macao')}</h3><p>${t('Diego Delso 摄于 2013 年。澳门会议页与宣传图采用裁切、缩放后的照片，改编图像沿用 CC BY-SA 3.0 许可。','Photograph by Diego Delso, 2013. The Macao meeting page and meeting graphics feature cropped and resized versions of the photograph. The adaptations are available under CC BY-SA 3.0.')} <a href="${sources.city}">${t('原作','Original')}</a> · <a href="${sources.cityLicense}">${t('许可','Licence')}</a></p>
+      <h3>${t('主动脉弓及其分支','The aortic arch and its branches')}</h3><p>H. V. Carter, <i>Gray’s Anatomy</i>, 1918, fig. 505. ${t('公有领域。','Public domain.')} <a href="${sources.plateLicense}">${t('原图及公版说明 · 维基共享资源','Original plate and rights information · Wikimedia Commons')}</a></p>
       <h3>${t('会议合影与会标','Meeting photographs and emblem')}</h3><p>${t('新加坡大会合影及会场照片（主会场报告、青年学者论坛、会场外资料台）、深圳 ASVB 专场合影与学会会标来自 ASVB 会务资料。两届会后报道亦收录了对应现场影像。','The Singapore group photograph and on-site photographs (main session, Young Scholar Forum and meeting desk), the Shenzhen photograph and the Society emblem are from the ASVB meeting archives. The respective post-meeting reports also document these gatherings.')}</p>
       <h3>${t('网页字体','Typefaces')}</h3><p>Instrument Serif · Noto Serif SC. <a href="${v.root}assets/LICENSE-InstrumentSerif.txt">Instrument Serif OFL</a> · <a href="${v.root}assets/LICENSE-NotoSerifSC.txt">Noto Serif SC OFL</a></p></section></div></div></main>`;
 }
