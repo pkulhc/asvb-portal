@@ -1,5 +1,6 @@
 export const sources = {
   firstMeeting: 'https://www.chinaphar.com/announcement/view/104',
+  vanhoutteTribute: 'https://www.jstage.jst.go.jp/article/circj/advpub/0/advpub_CJ-19-0909/_html/-char/en',
   huangProfile: 'https://scholars.cityu.edu.hk/en/persons/yhuan24/',
   wangProfile: 'https://hsc.ecnu.edu.cn/ab/c3/c37112a437187/page.htm',
   bianProfile: 'https://med.sustech.edu.cn/en/teachersMoreE?AID=53&name=Jinsong+BIAN',
@@ -122,7 +123,7 @@ export const officers = [
 ];
 
 export const presidents = [
-  [['创会时期','Founding years'], leaders.vanhoutte, ['创会主席，2005 年首届学术会议时在任。','Founding President, in office at the first scientific meeting in 2005.']],
+  [['创会时期','Founding years'], leaders.vanhoutte, ['创会主席，2005 年首届学术会议时在任。1989–2007 年任 <i>Journal of Cardiovascular Pharmacology</i> 主编。','Founding President, in office at the first scientific meeting in 2005. He served as Editor-in-Chief of the <i>Journal of Cardiovascular Pharmacology</i> from 1989 to 2007.']],
   [['2010–2018','2010–2018'], leaders.huang, ['曾任创会秘书长，2010 年接任主席。','Previously the founding Secretary-General, he became President in 2010.'], 'huangProfile'],
   [['2018–2025','2018–2025'], leaders.wang, ['2018 年上海会员大会当选，2025 年深圳换届前仍任主席。','Elected in Shanghai in 2018 and chaired the 2025 General Assembly in Shenzhen before the leadership transition.'], 'wangProfile'],
   [['2025–2027','2025–2027'], leaders.bian, ['2025 年深圳会员大会确认本届任职。','The 2025 General Assembly in Shenzhen endorsed his appointment for the current term.'], 'bianProfile']
@@ -243,8 +244,8 @@ export const records = [
 ];
 
 export const history = [
-  ['2004', ['学会创立 · 香港','Society founded · Hong Kong'], ['由 Paul M. Vanhoutte 教授倡议成立，致力于推动亚洲血管生物学与血管医学的发展。','Established at the initiative of Professor Paul M. Vanhoutte to advance vascular biology and medicine in Asia.']],
-  ['2005', ['首届 · 上海','1st · Shanghai'], ['首届学术会议由 Paul M. Vanhoutte 教授与苏定冯教授共同组织，汇聚亚太地区的基础与临床研究者。','Organized by Professors Paul M. Vanhoutte and Ding-Feng Su, the inaugural meeting brought together basic and clinical researchers from across the Asia-Pacific.'], sources.firstMeeting],
+  ['2004', ['学会创立 · 香港','Society founded · Hong Kong'], ['Paul M. Vanhoutte 教授在香港倡议创立 ASVB，推动亚洲血管生物学与血管医学研究。','Professor Paul M. Vanhoutte founded ASVB in Hong Kong to advance vascular biology and medicine in Asia.']],
+  ['2005', ['首届 · 上海','1st · Shanghai'], ['首届学术会议（<span lang="en">The 1st Scientific Meeting of The Asian Society for Vascular Biology</span>）于 2005 年 10 月 8 日在中国上海开幕。创会主席 Paul M. Vanhoutte 教授与苏定冯教授共同组织会议。ASVB 与第二军医大学联合发出参会邀请，苏定冯时任该校药理学教研室主任。','The 1st Scientific Meeting of The Asian Society for Vascular Biology opened on 8 October 2005 in Shanghai, China. Founding President Paul M. Vanhoutte and Professor Ding-Feng Su organized the meeting. ASVB and the Second Military Medical University jointly invited delegates, and Professor Su headed the university’s Department of Pharmacology.'], sources.firstMeeting],
   ['2006', ['第二届 · 上海','2nd · Shanghai'], ['继 2005 年首届会议后，第二届学术会议也在上海举行。','The second scientific meeting returned to Shanghai, host city of the inaugural meeting in 2005.']],
   ['2008', ['第三届 · 新加坡','3rd · Singapore'], ['第三届会议在新加坡国立大学举行。','The National University of Singapore hosted the third meeting.']],
   ['2010', ['第四届 · 香港','4th · Hong Kong'], ['第四届学术会议在香港举行。','Hong Kong hosted the fourth scientific meeting.']],

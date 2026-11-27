@@ -331,7 +331,8 @@ function society(v) {
     </div></section>
 
     <section id="history" class="history-section"><div class="wrap split-intro"><div>
-      <h2>${t('学会历史','Our history')}</h2><p>${t('从 2004 年香港创会到历届亚太学术会议。','From the Society’s founding in 2004 to its scientific meetings across Asia.')}</p>
+      <h2>${t('学会历史','Our history')}</h2><p>${t('从 2004 年香港创会到历届亚太学术会议。','From the Society’s founding in Hong Kong in 2004 to its scientific meetings across Asia.')}</p>
+      <p>${cite('sources.html#founding-records',t('创会与首届会议资料','Founding and inaugural meeting sources'))}</p>
       <div class="traditions-block">
         <h3>${t('血管实验技术交流','Vascular myography workshop')}</h3>
         <p class="body-copy">${t('2014 年 5 月 16–17 日，ASVB 在复旦大学上海医学院联合举办“Myography in Greater China”工作坊，邀请 7 位讲者，围绕血管张力测定开展技术交流。','On 16–17 May 2014, ASVB co-organized the Myography in Greater China workshop at Fudan University Shanghai Medical College. The workshop featured seven invited speakers who shared experimental methods for measuring vascular responses.')}</p>
@@ -599,6 +600,11 @@ function credits(v) {
         <li>${cite(sources.huangProfile,t('黄聿教授 · 香港城市大学学者主页','Yu Huang · CityUHK Scholars profile'))}</li>
         <li>${cite(sources.wangProfile,t('汪南平教授 · 华东师范大学教师主页','Nanping Wang · East China Normal University faculty profile'))}</li>
         <li>${cite(sources.bianProfile,t('卞劲松教授 · 南方科技大学医学院教师主页','Jinsong Bian · SUSTech School of Medicine faculty profile'))}</li>
+      </ul>
+      <h3 id="founding-records">${t('创会与首届会议','Founding and inaugural meeting')}</h3>
+      <p>${t('ASVB 第九届会议英文通知记载学会于 2004 年在香港创立。2005 年会议通知记载首届会议于 10 月 8 日在上海开始，并列出 ASVB、第二军医大学及该校药理学教研室主任苏定冯教授。','The English announcement for the ninth ASVB meeting dates the Society’s founding in Hong Kong to 2004. The 2005 announcement gives 8 October as the opening date in Shanghai and names ASVB, the Second Military Medical University and its head of pharmacology, Professor Ding-Feng Su.')}</p>
+      <ul class="source-list">
+        <li>${cite(sources.vanhoutteTribute,t('Paul M. Vanhoutte 教授纪念文 · Circulation Journal','Tribute to Paul M. Vanhoutte · Circulation Journal'))}</li>
       </ul>
       <h3 id="meeting-themes">${t('历届会议主题出处','Sources for meeting themes')}</h3>
       <p>${t('深圳第十届 ASVB 学术会议的英文主题见卞劲松主席 2026 年 6 月 12 日工作报告第 2 节。本站附中文译文。同期联合论坛的中文主题见南方科技大学医学院发布的第三轮通知。','The English theme for the 10th ASVB meeting in Shenzhen appears in section 2 of President Jinsong Bian’s report of 12 June 2026. This site provides a Chinese translation. The SUSTech School of Medicine’s third announcement gives the Chinese theme of the joint forum.')}</p>
