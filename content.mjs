@@ -130,9 +130,13 @@ export const presidents = [
 
 export const secretariesGeneral = [
   [['2005–2010','2005–2010'], leaders.huang, ['创会秘书长。','Founding Secretary-General.'], 'huangProfile'],
-  [['2018 年前曾任','Served before 2018'], leaders.wang, ['西安交通大学履历记载曾任此职，任期起止待考。','His Xi’an Jiaotong University profile records his service in this role. Exact dates remain to be verified.'], 'wangProfile'],
-  [['2018 年当选','Elected in 2018'], leaders.chiu, ['上海会员大会确认的任期为 2018–2020 年，实际卸任时间待考。','The Shanghai General Assembly approved a 2018–2020 term. His exact departure date remains to be verified.']],
+  [['2010–2018','2010–2018'], leaders.wang, ['以秘书长身份发出 2018 年上海会员大会通知，并在该次大会换届时出任主席。','Issued the notice for the 2018 Shanghai General Assembly as Secretary-General and became President at that meeting.'], 'wangProfile'],
+  [['2018–2025','2018–2025'], leaders.chiu, ['2018 年上海会员大会换届时接任秘书长，任期与汪南平主席同期。','Succeeded Nanping Wang as Secretary-General at the 2018 Shanghai General Assembly and served during Wang’s presidency.']],
   [['2025–2027','2025–2027'], leaders.susan, ['2025 年深圳会员大会确认本届任职，2026 年新加坡会议纪要继续列为秘书长。','Endorsed for the 2025–2027 term in Shenzhen and listed as Secretary-General in the 2026 Singapore minutes.']]
+];
+
+export const deputySecretariesGeneral = [
+  [['2025–2027','2025–2027'], leaders.lu, ['2026 年新加坡会员大会记录列为本届副秘书长。','Listed as Deputy Secretary-General in the 2026 Singapore General Assembly records.']]
 ];
 
 export const council = {
@@ -159,9 +163,10 @@ export const council = {
         'Wai San Cheang', leaders.lu[1], 'Li Wang', 'Lei Xiao', 'Liping Xie', 'Tingting Zhang']
     },
     {
-      title: ['2018 年上海会员大会名单','2018 General Assembly, Shanghai'],
-      members: [leaders.vanhoutte[1], leaders.huang[1], 'Hiroaki Shimokawa', leaders.wang[1], leaders.george[1],
-        'Kenneth Kun-Yu Wu', leaders.bian[1], leaders.chiu[1], 'Mohammad Rais Mustafa', 'Zuyi Yuan',
+      title: ['2018 年上海会员大会 · 理事会提名','2018 General Assembly, Shanghai · Council nominations'],
+      nominationNote: ['2018 年 11 月 3 日的大会资料列出 2018–2020 届理事会的续任、新任及增选提名。换届议程列明汪南平任主席、Paul M. Vanhoutte 任荣誉主席、裘正健任秘书长、梁栢行任司库。','Materials for the 3 November 2018 General Assembly list nominations for returning, new and co-opted members of the 2018–2020 Council. The leadership item names Nanping Wang as President, Paul M. Vanhoutte as Honorary President, Jeng-Jiann Chiu as Secretary-General and George P.H. Leung as Treasurer.'],
+      members: [leaders.vanhoutte[1], 'Hiroaki Shimokawa', 'Kenneth Kun-Yu Wu', leaders.george[1], leaders.huang[1],
+        leaders.wang[1], leaders.bian[1], 'Mohammad Rais Mustafa', leaders.chiu[1], 'Takeshi Adachi', 'Zuyi Yuan',
         'Masato Tsutsui', 'Erdan Dong', 'Ji-Ho Park', 'Yulong He'],
       coOpted: ['Kimio Satoh', 'Min Xia', 'Jack W.T. Wong', 'Dharmani Devi Murugan', 'Yi Shi', 'Chia-Ching Wu']
     }
@@ -240,13 +245,13 @@ export const records = [
 export const history = [
   ['2004', ['学会创立 · 香港','Society founded · Hong Kong'], ['由 Paul M. Vanhoutte 教授倡议成立，致力于推动亚洲血管生物学与血管医学的发展。','Established at the initiative of Professor Paul M. Vanhoutte to advance vascular biology and medicine in Asia.']],
   ['2005', ['首届 · 上海','1st · Shanghai'], ['首届学术会议汇聚亚太地区的基础与临床研究者。','The inaugural meeting brought together basic and clinical researchers across the Asia-Pacific.'], sources.firstMeeting],
-  ['2006', ['第二届 · 中国','2nd · China'], ['继上海首届会议后，学会在中国举行第二届学术会议。','After the inaugural meeting in Shanghai, the Society held its second scientific meeting in China.']],
+  ['2006', ['第二届 · 上海','2nd · Shanghai'], ['继 2005 年首届会议后，第二届学术会议也在上海举行。','The second scientific meeting returned to Shanghai, host city of the inaugural meeting in 2005.']],
   ['2008', ['第三届 · 新加坡','3rd · Singapore'], ['第三届会议在新加坡国立大学举行。','The National University of Singapore hosted the third meeting.']],
   ['2010', ['第四届 · 香港','4th · Hong Kong'], ['第四届学术会议在香港举行。','Hong Kong hosted the fourth scientific meeting.']],
-  ['2012', ['第五届 · 西安','5th · Xi’an'], ['约 200 名多国学者参会，设青年研究者奖竞赛并召开会员大会；会后述评刊于《Journal of Cardiovascular Pharmacology》。','Hosted around 200 participants across nine countries and regions, featuring the Young Investigator Award competition, a General Assembly and an editorial in the Journal of Cardiovascular Pharmacology.']],
-  ['2014', ['第六届 · 吉隆坡','6th · Kuala Lumpur'], ['马来西亚吉隆坡举办第六届会议，大会摘要及述评刊于《Journal of Cardiovascular Pharmacology》。','Kuala Lumpur, Malaysia, hosted the sixth meeting, with meeting abstracts and an editorial published in the Journal of Cardiovascular Pharmacology.']],
-  ['2016', ['第七届 · 花莲','7th · Hualien'], ['由花莲慈济医院 Tony J. F. Lee 教授承办，汇聚 14 个国家和地区的 223 名学者，展示壁报 35 份。','Organized by Professor Tony J. F. Lee at Hualien Tzu Chi Hospital, welcoming 223 participants from 14 countries and regions with 35 poster presentations.'], sources.hualien],
-  ['2018', ['第八届 · 上海','8th · Shanghai'], ['与中国病理生理学会血管医学专业委员会第三届学术研讨会联合举行，会员大会决议设立 Tony J. F. Lee 纪念讲座。','Held jointly with the third symposium of the vascular medicine committee of the Chinese Association of Pathophysiology; the General Assembly established the Tony J. F. Lee Memorial Lecture.'], sources.shanghai],
+  ['2012', ['第五届 · 西安','5th · Xi’an'], ['10 月 27–29 日，由汪南平、袁祖贻教授组织，约 200 人参会。Tony J. F. Lee 教授主讲第五届亚洲血管生物学讲座。会议设青年研究者奖竞赛，会员大会选举袁祖贻、裘正健为新任理事。','Held on 27–29 October and organized by Nanping Wang and Zuyi Yuan, the meeting drew about 200 participants. Tony J. F. Lee delivered the fifth Asian Lecture on Vascular Biology. The programme included a Young Investigator Award competition, and the General Assembly elected Zuyi Yuan and Jeng-Jiann Chiu to the Council.']],
+  ['2014', ['第六届 · 吉隆坡','6th · Kuala Lumpur'], ['8 月 22–24 日，由 Mohammad Rais Mustafa 教授组织，来自 10 个国家和地区的 18 位受邀讲者参会。下川宏明教授主讲第六届亚洲血管生物学讲座。大会摘要和述评刊于《Journal of Cardiovascular Pharmacology》。','Held on 22–24 August and organized by Mohammad Rais Mustafa, the meeting brought together 18 invited speakers from 10 countries and regions. Hiroaki Shimokawa delivered the sixth Asian Lecture on Vascular Biology. The abstracts and a meeting editorial appeared in the Journal of Cardiovascular Pharmacology.']],
+  ['2016', ['第七届 · 花莲','7th · Hualien'], ['10 月 27–29 日，由花莲慈济医院 Tony J. F. Lee 教授组织，共有来自 14 个国家和地区的 223 人参会，展示壁报 35 份。裘正健教授主讲第七届亚洲血管生物学讲座。','Held on 27–29 October and organized by Tony J. F. Lee at Hualien Tzu Chi Hospital, the meeting drew 223 participants from 14 countries and regions and featured 35 posters. Jeng-Jiann Chiu delivered the seventh Asian Lecture on Vascular Biology.'], sources.hualien],
+  ['2018', ['第八届 · 上海','8th · Shanghai'], ['11 月 2–4 日，在上海交通大学医学院懿德楼举行，同期举办中国病理生理学会血管医学专业委员会第三届学术研讨会。黄聿教授主讲第八届亚洲血管生物学讲座。11 月 3 日，学会召开会员大会进行换届，并决定设立 Tony J. F. Lee 纪念讲座。','Held on 2–4 November at the Yide Auditorium, Shanghai Jiao Tong University School of Medicine, alongside the third symposium of the vascular medicine committee of the Chinese Association of Pathophysiology. Yu Huang delivered the eighth Asian Lecture on Vascular Biology. At the 3 November General Assembly, the Society transitioned to new leadership and established the Tony J. F. Lee Memorial Lecture.'], sources.shanghai],
   ['2024', ['第九届 · 南京','9th · Nanjing'], ['约 200 名学者参会；黄聿教授作 Paul M. Vanhoutte 纪念讲座，Alex F. Chen 教授作 Tony J. F. Lee 纪念讲座。','Welcomed around 200 participants; Yu Huang delivered the Paul M. Vanhoutte Memorial Lecture and Alex F. Chen delivered the Tony J. F. Lee Memorial Lecture.']],
   ['2025', ['第十届 · 深圳','10th · Shenzhen'], ['与第二届血管稳态与疾病研究前沿论坛联合举行，并召开会员大会确认本届学会领导与理事会换届。','Joined the second Conference on Vascular Homeostasis and Diseases, with the General Assembly endorsing the 2025–2027 Society leadership and council transition.'], 'shenzhen-2025.html'],
   ['2026', ['第十一届 · 新加坡','11th · Singapore'], ['重返新加坡国立大学，设 Paul M. Vanhoutte 纪念讲座和青年学者论坛，通过修订版《理事会章程》。','Returned to the National University of Singapore with the Paul M. Vanhoutte Memorial Lecture, Young Scholar Forum and adoption of the amended Council Bylaws.'], 'singapore-2026.html'],

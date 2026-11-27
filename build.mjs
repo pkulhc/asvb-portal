@@ -3,7 +3,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   sources, records, history, membership, stature, researchAreas, membershipStats,
-  mission, traditions, governance, officers, presidents, secretariesGeneral, council,
+  mission, traditions, governance, officers, presidents, secretariesGeneral, deputySecretariesGeneral, council,
   secretariat, wechat
 } from './content.mjs';
 
@@ -330,7 +330,13 @@ function society(v) {
       </div>
     </div></section>
 
-    <section id="history" class="history-section"><div class="wrap split-intro"><div><h2>${t('学会历史','Our history')}</h2><p>${t('从 2004 年香港创会到历届亚太学术会议。','From the Society’s founding in 2004 to its scientific meetings across Asia.')}</p></div>
+    <section id="history" class="history-section"><div class="wrap split-intro"><div>
+      <h2>${t('学会历史','Our history')}</h2><p>${t('从 2004 年香港创会到历届亚太学术会议。','From the Society’s founding in 2004 to its scientific meetings across Asia.')}</p>
+      <div class="traditions-block">
+        <h3>${t('血管实验技术交流','Vascular myography workshop')}</h3>
+        <p class="body-copy">${t('2014 年 5 月 16–17 日，ASVB 在复旦大学上海医学院联合举办“Myography in Greater China”工作坊，邀请 7 位讲者，围绕血管张力测定开展技术交流。','On 16–17 May 2014, ASVB co-organized the Myography in Greater China workshop at Fudan University Shanghai Medical College. The workshop featured seven invited speakers who shared experimental methods for measuring vascular responses.')}</p>
+      </div>
+    </div>
       <ol class="timeline">${history.map(([year,place,summary,target])=>{
         const isExt = target && target.startsWith('http');
         return `<li id="history-${year}"><em>${year}</em><div><h3>${target?`<a href="${escapeAttribute(target)}">${value(place)}${isExt?` <span class="ext-mark" aria-hidden="true">${icon('external')}</span>`:''}</a>`:value(place)}</h3><p>${value(summary)}</p></div></li>`;
@@ -341,7 +347,9 @@ function society(v) {
       <h2>${t('历届主席与秘书长','Presidents and Secretaries-General')}</h2>
       <div class="leadership-grid">
         <div><h3>${t('主席','Presidents')}</h3>${leadershipList(presidents)}</div>
-        <div><h3>${t('秘书长','Secretaries-General')}</h3>${leadershipList(secretariesGeneral)}</div>
+        <div><h3>${t('秘书长','Secretaries-General')}</h3>${leadershipList(secretariesGeneral)}
+          <h3>${t('副秘书长','Deputy Secretary-General')}</h3>${leadershipList(deputySecretariesGeneral)}
+        </div>
       </div>
     </section>
 
@@ -370,7 +378,13 @@ function society(v) {
       </div>
 
       <div class="council-archive"><h3>${t('往届理事会记录','Past council records')}</h3>
-        ${council.archives.map(archive=>`<details class="disclosure"><summary>${value(archive.title)}</summary><div class="leadership-grid council-lists"><div><h4>${t('理事','Council members')}</h4>${names(archive.members)}</div><div><h4>${t('增选理事','Co-opted members')}</h4>${names(archive.coOpted)}</div></div></details>`).join('')}
+        ${council.archives.map(archive=>`<details class="disclosure"><summary>${value(archive.title)}</summary>
+          ${archive.nominationNote?`<p class="council-date">${value(archive.nominationNote)}</p>`:''}
+          <div class="leadership-grid council-lists">
+            <div><h4>${archive.nominationNote?t('理事提名','Council nominees'):t('理事','Council members')}</h4>${names(archive.members)}</div>
+            <div><h4>${archive.nominationNote?t('增选理事提名','Co-opted member nominees'):t('增选理事','Co-opted members')}</h4>${names(archive.coOpted)}</div>
+          </div>
+        </details>`).join('')}
         <p class="council-date">${t('本页收录已有档案可核实的名单，早期理事名录有待补充。','The records presented here are the rosters that could be verified. Earlier council lists remain to be documented.')} ${cite('sources.html#society-sources',t('查阅资料出处','See the sources'))}</p>
       </div>
     </div></section>
@@ -580,7 +594,7 @@ function credits(v) {
       <p>${t('澳门会议内容依据《第十二届亚洲血管生物学学会会议第一轮通知》中英文修订稿。会期、场地及费用按第一轮通知的拟定状态列示。学会宗旨依据 2026 年修订的 ASVB 章程。','The Macao pages follow the bilingual first announcement for the 12th Scientific Meeting. Dates, venue and fees are presented as proposed. The description of the Society follows its bylaws revised in 2026.')}</p>
       <ul class="source-list"><li>${cite(sources.firstMeeting,t('首届会议通知 · Acta Pharmacologica Sinica','Inaugural meeting announcement · Acta Pharmacologica Sinica'))}</li><li>${cite(sources.shanghai,t('第八届会议通知 · 上海交通大学医学院','Eighth meeting notice · Shanghai Jiao Tong University School of Medicine'))}</li><li>${t('第十届会后报道 · 广东省药理学会','10th meeting report · Guangdong Pharmacological Society')}</li><li>${cite(sources.interview,t('深圳会议讲者 Maik Gollasch 访谈 · Vessel Plus','Interview with Shenzhen meeting speaker Maik Gollasch · Vessel Plus'))}</li></ul>
       <h3 id="society-sources">${t('学会宗旨、历史与理事会','Mission, history and council')}</h3>
-      <p>${t('学会宗旨依据 ASVB 章程第 II 条。创会地点及年份见第九届会议通知。历届会议概况、会员类别统计（截至 2026 年 6 月 11 日）、顾问委员会及理事名单依据 2018 年上海、2025 年深圳及 2026 年新加坡会员大会纪要；理事会规模、任期与专门委员会设置依据 2026 年 6 月 12 日通过的《理事会章程》；会员申请表采用学会现行中英文《会员登记表》。','The mission follows Article II of the ASVB bylaws. The ninth meeting announcement records the founding year and place. Meeting history notes, membership figures as of 11 June 2026, and the Advisory Committee and Council rosters draw on General Assembly records from Shanghai (2018), Shenzhen (2025) and Singapore (2026). Council size, terms and standing committees follow the Council Bylaws adopted on 12 June 2026, alongside the bilingual Membership Application Form.')}</p>
+      <p>${t('学会宗旨依据 ASVB 章程第 II 条。创会地点及年份见第九届会议通知。第五至第八届会议概况、2014 年工作坊和 2018 年理事会提名依据 2018 年 11 月 3 日上海会员大会报告与议程。会员统计（截至 2026 年 6 月 11 日）、顾问委员会及近届理事名单依据 2025 年深圳和 2026 年新加坡会员大会记录。理事会规模、任期与专门委员会设置依据 2026 年 6 月 12 日通过的《理事会章程》。会员申请采用学会现行中英文《会员登记表》。','The mission follows Article II of the ASVB bylaws. The ninth meeting announcement records the founding year and place. The report and agenda of the 3 November 2018 Shanghai General Assembly document the fifth through eighth meetings, the 2014 workshop and the 2018 Council nominations. Membership figures as of 11 June 2026 and recent Advisory Committee and Council rosters draw on General Assembly records from Shenzhen (2025) and Singapore (2026). Council size, terms and standing committees follow the Council Bylaws adopted on 12 June 2026. Applicants use the Society’s current bilingual Membership Application Form.')}</p>
       <ul class="source-list">
         <li>${cite(sources.huangProfile,t('黄聿教授 · 香港城市大学学者主页','Yu Huang · CityUHK Scholars profile'))}</li>
         <li>${cite(sources.wangProfile,t('汪南平教授 · 华东师范大学教师主页','Nanping Wang · East China Normal University faculty profile'))}</li>
