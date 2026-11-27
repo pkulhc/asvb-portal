@@ -244,7 +244,7 @@ export const records = [
 
 export const history = [
   ['2004', ['学会创立 · 香港','Society founded · Hong Kong'], ['由 Paul M. Vanhoutte 教授倡议成立，致力于推动亚洲血管生物学与血管医学的发展。','Established at the initiative of Professor Paul M. Vanhoutte to advance vascular biology and medicine in Asia.']],
-  ['2005', ['首届 · 上海','1st · Shanghai'], ['首届学术会议汇聚亚太地区的基础与临床研究者。','The inaugural meeting brought together basic and clinical researchers across the Asia-Pacific.'], sources.firstMeeting],
+  ['2005', ['首届 · 上海','1st · Shanghai'], ['首届学术会议由 Paul M. Vanhoutte 教授与苏定冯教授共同组织，汇聚亚太地区的基础与临床研究者。','Organized by Professors Paul M. Vanhoutte and Ding-Feng Su, the inaugural meeting brought together basic and clinical researchers from across the Asia-Pacific.'], sources.firstMeeting],
   ['2006', ['第二届 · 上海','2nd · Shanghai'], ['继 2005 年首届会议后，第二届学术会议也在上海举行。','The second scientific meeting returned to Shanghai, host city of the inaugural meeting in 2005.']],
   ['2008', ['第三届 · 新加坡','3rd · Singapore'], ['第三届会议在新加坡国立大学举行。','The National University of Singapore hosted the third meeting.']],
   ['2010', ['第四届 · 香港','4th · Hong Kong'], ['第四届学术会议在香港举行。','Hong Kong hosted the fourth scientific meeting.']],
